@@ -43,7 +43,7 @@ header{
   text-align:center;
 }
 .brand-logo{
-  max-height:56px;max-width:75%;width:auto;
+  max-height:92px;max-width:88%;width:auto;
   object-fit:contain;margin:0 auto;display:block;
 }
 .brand{
@@ -118,18 +118,18 @@ main{
   font-size:2.3rem;font-weight:500;font-style:italic;
   color:var(--copper);
   opacity:0;
-  animation:cycle 9s infinite;
+  animation:cycle 15s infinite;
 }
 .lang-rotator span:nth-child(1){animation-delay:0s}
-.lang-rotator span:nth-child(2){animation-delay:1.5s}
-.lang-rotator span:nth-child(3){animation-delay:3s}
-.lang-rotator span:nth-child(4){animation-delay:4.5s}
-.lang-rotator span:nth-child(5){animation-delay:6s}
-.lang-rotator span:nth-child(6){animation-delay:7.5s}
+.lang-rotator span:nth-child(2){animation-delay:2.5s}
+.lang-rotator span:nth-child(3){animation-delay:5s}
+.lang-rotator span:nth-child(4){animation-delay:7.5s}
+.lang-rotator span:nth-child(5){animation-delay:10s}
+.lang-rotator span:nth-child(6){animation-delay:12.5s}
 @keyframes cycle{
   0%,3%{opacity:0;transform:translateY(10px)}
-  6%,14%{opacity:1;transform:none}
-  17%,100%{opacity:0;transform:translateY(-10px)}
+  5%,14%{opacity:1;transform:none}
+  16%,100%{opacity:0;transform:translateY(-10px)}
 }
 .lang-grid{
   display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;
@@ -467,7 +467,7 @@ const SERVICES = [
   {id:"balayage_nocut", name:{de:"Balayage ohne Schnitt", fr:"Balayage sans coupe", en:"Balayage without cut", es:"Balayage sin corte", nl:"Balayage zonder knippen", da:"بالياج بلا قص"}, pS:2000, pL:2800, dur:{de:"ca. 3 Std", fr:"env. 3 h", en:"approx. 3 h", es:"aprox. 3 h", nl:"ca. 3 uur", da:"تقريبا 3 سوايع"}, q:"colored", photo:true},
   {id:"keratin", name:{de:"Protein / Keratin", fr:"Protéine / Kératine", en:"Protein / Keratin", es:"Proteína / Keratina", nl:"Proteïne / Keratine", da:"بروتين / كيراتين"}, pS:1500, pL:2500, dur:{de:"ca. 2–3 Std", fr:"env. 2–3 h", en:"approx. 2–3 h", es:"aprox. 2–3 h", nl:"ca. 2–3 uur", da:"من ساعتين ل 3 سوايع"}, q:"pretreat", photo:true},
   {id:"extensions", name:{de:"Extensions", fr:"Extensions", en:"Extensions", es:"Extensiones", nl:"Extensions", da:"إكستنشن"}, pS:null, pL:null, dur:{de:"individuell", fr:"individuel", en:"individual", es:"individual", nl:"individueel", da:"على حساب الحالة"}, q:"change", photo:true},
-  {id:"beratung", name:{de:"Beratung", fr:"Consultation", en:"Consultation", es:"Consulta", nl:"Advies", da:"استشارة"}, pS:200, pL:null, dur:{de:"ca. 30 Min", fr:"env. 30 min", en:"approx. 30 min", es:"aprox. 30 min", nl:"ca. 30 min", da:"تقريبا 30 دقيقة"}, q:"change", photo:false},
+  {id:"beratung", name:{de:"Beratung", fr:"Consultation", en:"Consultation", es:"Consulta", nl:"Advies", da:"استشارة"}, pS:200, pL:null, dur:{de:"ca. 15 Min", fr:"env. 15 min", en:"approx. 15 min", es:"aprox. 15 min", nl:"ca. 15 min", da:"تقريبا 15 دقيقة"}, q:"change", photo:false},
 ];
 
 /* Leistungsname in aktueller Sprache */
@@ -526,7 +526,7 @@ const T = {
     qTitle:{hairlen:"Parlez-nous de vos cheveux", colored:"Vos cheveux sont-ils colorés actuellement ?", pretreat:"Avez-vous déjà eu des traitements (lissage, coloration…) ?", change:"Qu'aimeriez-vous changer ?"},
     qSub:"Longueur, état, ce que vous souhaitez – tout ce qui nous aide.",
     qPlaceholder:"Ex. : cheveux mi-longs, colorés il y a 3 mois…",
-    photoHint:"Une photo de vos cheveux nous aide beaucoup – vous pourrez l'envoyer directement dans WhatsApp.",
+    photoHint:"Une photo de vos cheveux nous aide beaucoup – prenez-en une ou ajoutez-en une ici.",
     perTitle:"Quand êtes-vous à Nador ?",
     perSub:"Beaucoup de nos clientes sont de passage – dites-nous votre période.",
     perPlaceholder:"Ex. : du 15 au 25 août, plutôt le matin…",
@@ -544,7 +544,7 @@ const T = {
     qTitle:{hairlen:"Erzähl uns von deinem Haar", colored:"Ist dein Haar aktuell gefärbt?", pretreat:"Gab es schon Vorbehandlungen (Glättung, Färbung …)?", change:"Was möchtest du verändern?"},
     qSub:"Länge, Zustand, dein Wunsch – alles, was uns hilft.",
     qPlaceholder:"z. B. schulterlang, vor 3 Monaten gefärbt …",
-    photoHint:"Ein Foto von deinem Haar hilft uns sehr – du kannst es direkt in WhatsApp mitschicken.",
+    photoHint:"Ein Foto von deinem Haar hilft uns sehr – mach direkt eins oder lade eins hoch.",
     perTitle:"Wann bist du in Nador?",
     perSub:"Viele unserer Kundinnen sind zu Besuch – nenn uns deinen Zeitraum.",
     perPlaceholder:"z. B. 15.–25. August, am liebsten vormittags …",
@@ -562,7 +562,7 @@ const T = {
     qTitle:{hairlen:"Tell us about your hair", colored:"Is your hair currently coloured?", pretreat:"Any previous treatments (straightening, colour …)?", change:"What would you like to change?"},
     qSub:"Length, condition, your wish – anything that helps.",
     qPlaceholder:"e.g. shoulder-length, coloured 3 months ago …",
-    photoHint:"A photo of your hair helps a lot – you can attach it directly in WhatsApp.",
+    photoHint:"A photo of your hair helps a lot – take one or upload one here.",
     perTitle:"When are you in Nador?",
     perSub:"Many of our clients are visiting – let us know your dates.",
     perPlaceholder:"e.g. 15–25 August, mornings preferred …",
@@ -580,7 +580,7 @@ const T = {
     qTitle:{hairlen:"Cuéntanos sobre tu cabello", colored:"¿Tu cabello está teñido actualmente?", pretreat:"¿Has tenido tratamientos previos (alisado, tinte …)?", change:"¿Qué te gustaría cambiar?"},
     qSub:"Largo, estado, tu deseo – todo lo que nos ayude.",
     qPlaceholder:"Ej.: media melena, teñido hace 3 meses …",
-    photoHint:"Una foto de tu cabello nos ayuda mucho – puedes enviarla directamente en WhatsApp.",
+    photoHint:"Una foto de tu cabello nos ayuda mucho – haz una o sube una aquí.",
     perTitle:"¿Cuándo estás en Nador?",
     perSub:"Muchas de nuestras clientas están de visita – dinos tus fechas.",
     perPlaceholder:"Ej.: del 15 al 25 de agosto, mejor por la mañana …",
@@ -598,7 +598,7 @@ const T = {
     qTitle:{hairlen:"Vertel ons over je haar", colored:"Is je haar momenteel gekleurd?", pretreat:"Eerdere behandelingen gehad (straightening, kleuring …)?", change:"Wat wil je veranderen?"},
     qSub:"Lengte, conditie, je wens – alles wat ons helpt.",
     qPlaceholder:"bv. schouderlang, 3 maanden geleden gekleurd …",
-    photoHint:"Een foto van je haar helpt enorm – je kunt die direct in WhatsApp meesturen.",
+    photoHint:"Een foto van je haar helpt enorm – maak er een of upload er een hier.",
     perTitle:"Wanneer ben je in Nador?",
     perSub:"Veel van onze klanten zijn op bezoek – laat ons je periode weten.",
     perPlaceholder:"bv. 15–25 augustus, liefst 's ochtends …",
@@ -616,7 +616,7 @@ const T = {
     qTitle:{hairlen:"قولي لينا على شعرك", colored:"واش شعرك مصبوغ دابا؟", pretreat:"واش درتي شي معالجة من قبل (ليساج، صباغة …)؟", change:"شنو بغيتي تبدلي؟"},
     qSub:"الطول، الحالة، اللي بغيتي – كلشي اللي يقدر يعاونا.",
     qPlaceholder:"مثلا: شعر متوسط، مصبوغ هادي 3 شهور …",
-    photoHint:"تصويرة ديال شعرك غادي تعاونا بزاف – تقدري تصيفطيها مباشرة فواتساب.",
+    photoHint:"تصويرة ديال شعرك غادي تعاونا بزاف – صوري وحدة ولا زيدي وحدة من هنا.",
     perTitle:"إمتى غادي تكوني فالناظور؟",
     perSub:"بزاف من الكليان ديالنا جايين فزيارة – قولي لينا الفترة ديالك.",
     perPlaceholder:"مثلا: من 15 ل 25 غشت، الصباح أحسن …",
