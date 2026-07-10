@@ -17,11 +17,11 @@
 <style>
 :root{
   color-scheme:light;
-  --plum-ink:#33202e;      /* tiefes Aubergine – Grundton */
+  --plum-ink:#33202e;      /* tiefes Aubergine · Grundton */
   --plum-soft:#5b3a52;     /* helleres Plum für Sekundäres */
   --blush:#f7efe9;         /* warmer Porzellan-Hintergrund */
   --blush-deep:#efe1d7;    /* Kartenflächen */
-  --copper:#a85a3f;        /* gebranntes Kupfer – Akzent */
+  --copper:#a85a3f;        /* gebranntes Kupfer · Akzent */
   --champagne:#b99a63;     /* feines Gold für Linien/Labels */
   --white:#fffdfb;
   --shadow:0 10px 30px rgba(51,32,46,.10);
@@ -559,7 +559,7 @@ footer{
 
 <script>
 /* ═══════════════════════════════════════════════
-   KONFIGURATION — hier Moes echte Nummer eintragen
+   KONFIGURATION · hier Moes echte Nummer eintragen
    Format: Ländercode ohne + und ohne Leerzeichen
    z. B. Marokko: 2126XXXXXXXX
 ═══════════════════════════════════════════════ */
@@ -567,7 +567,7 @@ const MOE_WHATSAPP = "212678781991"; // Moes WhatsApp Business
 
 /* imgbb-API-Key für den Foto-Upload.
    Kostenlos holen: api.imgbb.com → "Get API key" (mit deinem bestehenden imgbb-Konto).
-   Ohne Key funktioniert die App trotzdem – dann gilt "Foto folgt in WhatsApp". */
+   Ohne Key funktioniert die App trotzdem · dann gilt "Foto folgt in WhatsApp". */
 const IMGBB_KEY = "ce7cdea3774047bf1f3596b4d2c145fb"; // imgbb Foto-Upload
 
 /* Optional: Make-Webhook für das Sheet-Logging.
@@ -585,7 +585,7 @@ const YARA_AVATAR = "https://images.squarespace-cdn.com/content/v1/693eabc3d625e
    Diese Liste wird beim Start geladen; hier nur ein Fallback, falls die Datei fehlt/fehlerhaft ist. */
 let AVAIL = [];
 
-/* Moes Instagram – für Deutschland-Anfragen ("wie gewohnt") */
+/* Moes Instagram · für Deutschland-Anfragen ("wie gewohnt") */
 const MOE_INSTAGRAM = "https://instagram.com/moelamkaddam";
 
 /* ── Leistungen (aus dem Leistungen-Tab, Private Room bewusst nicht dabei) ── */
@@ -594,10 +594,10 @@ const SERVICES = [
   {id:"cut_styling", name:{de:"Schnitt & Styling", fr:"Coupe & Coiffage", en:"Cut & Styling", es:"Corte & Peinado", nl:"Knippen & Styling", da:"قص و تصفيف"}, pS:650, pL:750, dur:{de:"ca. 1 Std", fr:"env. 1 h", en:"approx. 1 h", es:"aprox. 1 h", nl:"ca. 1 uur", da:"تقريبا ساعة"}, q:"hairlen", photo:false},
   {id:"root_color", name:{de:"Ansatzfarbe", fr:"Retouche racines", en:"Root Color", es:"Color de raíces", nl:"Uitgroei kleuren", da:"صباغة الجذور"}, pS:350, pL:500, dur:{de:"ca. 2 Std", fr:"env. 2 h", en:"approx. 2 h", es:"aprox. 2 h", nl:"ca. 2 uur", da:"تقريبا ساعتين"}, q:"colored", photo:false},
   {id:"full_color", name:{de:"Komplettfarbe", fr:"Coloration complète", en:"Full Color", es:"Color completo", nl:"Volledige kleuring", da:"صباغة كاملة"}, pS:750, pL:950, dur:{de:"ca. 2 Std", fr:"env. 2 h", en:"approx. 2 h", es:"aprox. 2 h", nl:"ca. 2 uur", da:"تقريبا ساعتين"}, q:"colored", photo:true},
-  {id:"gloss_toner", name:{de:"Gloss / Toner", fr:"Gloss / Toner", en:"Gloss / Toner", es:"Gloss / Toner", nl:"Gloss / Toner", da:"غلوس / تونر"}, pS:300, pL:400, dur:{de:"ca. 1–1,5 Std", fr:"env. 1–1,5 h", en:"approx. 1–1.5 h", es:"aprox. 1–1,5 h", nl:"ca. 1–1,5 uur", da:"ساعة – ساعة ونص"}, q:"hairlen", photo:false},
-  {id:"balayage_cut", name:{de:"Balayage mit Schnitt", fr:"Balayage avec coupe", en:"Balayage with cut", es:"Balayage con corte", nl:"Balayage met knippen", da:"بالياج مع القص"}, pS:2200, pL:3000, dur:{de:"ca. 3–4 Std", fr:"env. 3–4 h", en:"approx. 3–4 h", es:"aprox. 3–4 h", nl:"ca. 3–4 uur", da:"من 3 ل 4 سوايع"}, q:"colored", photo:true},
+  {id:"gloss_toner", name:{de:"Gloss / Toner", fr:"Gloss / Toner", en:"Gloss / Toner", es:"Gloss / Toner", nl:"Gloss / Toner", da:"غلوس / تونر"}, pS:300, pL:400, dur:{de:"ca. 1-1,5 Std", fr:"env. 1-1,5 h", en:"approx. 1-1.5 h", es:"aprox. 1-1,5 h", nl:"ca. 1-1,5 uur", da:"ساعة · ساعة ونص"}, q:"hairlen", photo:false},
+  {id:"balayage_cut", name:{de:"Balayage mit Schnitt", fr:"Balayage avec coupe", en:"Balayage with cut", es:"Balayage con corte", nl:"Balayage met knippen", da:"بالياج مع القص"}, pS:2200, pL:3000, dur:{de:"ca. 3-4 Std", fr:"env. 3-4 h", en:"approx. 3-4 h", es:"aprox. 3-4 h", nl:"ca. 3-4 uur", da:"من 3 ل 4 سوايع"}, q:"colored", photo:true},
   {id:"balayage_nocut", name:{de:"Balayage ohne Schnitt", fr:"Balayage sans coupe", en:"Balayage without cut", es:"Balayage sin corte", nl:"Balayage zonder knippen", da:"بالياج بلا قص"}, pS:2000, pL:2800, dur:{de:"ca. 3 Std", fr:"env. 3 h", en:"approx. 3 h", es:"aprox. 3 h", nl:"ca. 3 uur", da:"تقريبا 3 سوايع"}, q:"colored", photo:true},
-  {id:"keratin", name:{de:"Protein / Keratin", fr:"Protéine / Kératine", en:"Protein / Keratin", es:"Proteína / Keratina", nl:"Proteïne / Keratine", da:"بروتين / كيراتين"}, pS:1500, pL:2500, dur:{de:"ca. 2–3 Std", fr:"env. 2–3 h", en:"approx. 2–3 h", es:"aprox. 2–3 h", nl:"ca. 2–3 uur", da:"من ساعتين ل 3 سوايع"}, q:"pretreat", photo:true},
+  {id:"keratin", name:{de:"Protein / Keratin", fr:"Protéine / Kératine", en:"Protein / Keratin", es:"Proteína / Keratina", nl:"Proteïne / Keratine", da:"بروتين / كيراتين"}, pS:1500, pL:2500, dur:{de:"ca. 2-3 Std", fr:"env. 2-3 h", en:"approx. 2-3 h", es:"aprox. 2-3 h", nl:"ca. 2-3 uur", da:"من ساعتين ل 3 سوايع"}, q:"pretreat", photo:true},
   {id:"extensions", name:{de:"Extensions", fr:"Extensions", en:"Extensions", es:"Extensiones", nl:"Extensions", da:"إكستنشن"}, pS:null, pL:null, dur:{de:"individuell", fr:"individuel", en:"individual", es:"individual", nl:"individueel", da:"على حساب الحالة"}, q:"change", photo:true},
   {id:"beratung", name:{de:"Beratung", fr:"Consultation", en:"Consultation", es:"Consulta", nl:"Advies", da:"استشارة"}, pS:200, pL:null, dur:{de:"ca. 15 Min", fr:"env. 15 min", en:"approx. 15 min", es:"aprox. 15 min", nl:"ca. 15 min", da:"تقريبا 15 دقيقة"}, q:"change", photo:false},
 ];
@@ -684,16 +684,16 @@ const T = {
     sumConfirm:"Tout est correct ?",
     onRequest:"sur demande", credited:"déduite lors de la réservation",
     qTitle:{hairlen:"Parlez-nous de vos cheveux", colored:"Vos cheveux sont-ils colorés actuellement ?", pretreat:"Avez-vous déjà eu des traitements (lissage, coloration…) ?", change:"Qu'aimeriez-vous changer ?"},
-    qSub:"Longueur, état, ce que vous souhaitez – tout ce qui nous aide.",
+    qSub:"Longueur, état, ce que vous souhaitez · tout ce qui nous aide.",
     qPlaceholder:"Ex. : cheveux mi-longs, colorés il y a 3 mois…",
-    photoHint:"Une photo de vos cheveux nous aide beaucoup – prenez-en une ou ajoutez-en une ici.",
+    photoHint:"Une photo de vos cheveux nous aide beaucoup · prenez-en une ou ajoutez-en une ici.",
     perTitle:"Quand êtes-vous à Nador ?",
-    perSub:"Beaucoup de nos clientes sont de passage – dites-nous votre période.",
+    perSub:"Beaucoup de nos clientes sont de passage · dites-nous votre période.",
     perPlaceholder:"Ex. : du 15 au 25 août, plutôt le matin…",
     chips:["Cette semaine","Semaine prochaine","Je vis à Nador"],
-    perFrom:"Arrivée", perTo:"Départ", perLive:"Je vis à Nador", perHere:(a,b)=>`Moe est à Nador jusqu'au ${b} ✨`, perSoon:(a,b)=>`Moe sera de nouveau à Nador du ${a} au ${b}`, perAway:"Pour l'instant, aucune date d'ouverture n'est prévue – écrivez-nous, nous vous tiendrons au courant.", perOutside:(a,b)=>`Sur cette période, Moe n'est pas à Nador. Il y est du ${a} au ${b}.`, perPick:"Indiquez votre période sur place",
+    perFrom:"Arrivée", perTo:"Départ", perLive:"Je vis à Nador", perHere:(a,b)=>`Moe est à Nador jusqu'au ${b} ✨`, perSoon:(a,b)=>`Moe sera de nouveau à Nador du ${a} au ${b}`, perAway:"Pour l'instant, aucune date d'ouverture n'est prévue · écrivez-nous, nous vous tiendrons au courant.", perOutside:(a,b)=>`Sur cette période, Moe n'est pas à Nador. Il y est du ${a} au ${b}.`, perPick:"Indiquez votre période sur place",
     sumTitle:"Votre demande", sumSvc:"Prestation", sumHair:"Vos cheveux", sumPer:"Période", sumPhoto:"Photo à envoyer dans WhatsApp 📷",
-    waNote:"WhatsApp s'ouvre avec votre demande – Moe vous répond personnellement.",
+    waNote:"WhatsApp s'ouvre avec votre demande · Moe vous répond personnellement.",
     next:"Continuer", back:"Retour", send:"Envoyer la demande", restart:"Recommencer",
     waIntro:"Nouvelle demande de rendez-vous"},
   de:{dir:"ltr", flag:"🇩🇪", label:"Deutsch",
@@ -703,16 +703,16 @@ const T = {
     sumConfirm:"Alles richtig?",
     onRequest:"auf Anfrage", credited:"wird bei Buchung angerechnet",
     qTitle:{hairlen:"Erzähl uns von deinem Haar", colored:"Ist dein Haar aktuell gefärbt?", pretreat:"Gab es schon Vorbehandlungen (Glättung, Färbung …)?", change:"Was möchtest du verändern?"},
-    qSub:"Länge, Zustand, dein Wunsch – alles, was uns hilft.",
+    qSub:"Länge, Zustand, dein Wunsch · alles, was uns hilft.",
     qPlaceholder:"z. B. schulterlang, vor 3 Monaten gefärbt …",
-    photoHint:"Ein Foto von deinem Haar hilft uns sehr – mach direkt eins oder lade eins hoch.",
+    photoHint:"Ein Foto von deinem Haar hilft uns sehr · mach direkt eins oder lade eins hoch.",
     perTitle:"Wann bist du in Nador?",
-    perSub:"Viele unserer Kundinnen sind zu Besuch – nenn uns deinen Zeitraum.",
-    perPlaceholder:"z. B. 15.–25. August, am liebsten vormittags …",
+    perSub:"Viele unserer Kundinnen sind zu Besuch · nenn uns deinen Zeitraum.",
+    perPlaceholder:"z. B. 15.-25. August, am liebsten vormittags …",
     chips:["Diese Woche","Nächste Woche","Ich wohne in Nador"],
-    perFrom:"Ankunft", perTo:"Abreise", perLive:"Ich wohne in Nador", perHere:(a,b)=>`Moe ist bis ${b} in Nador ✨`, perSoon:(a,b)=>`Moe ist vom ${a} bis ${b} wieder in Nador`, perAway:"Aktuell ist kein Zeitraum hinterlegt – schreib uns, wir melden uns bei dir.", perOutside:(a,b)=>`In diesem Zeitraum ist Moe leider nicht in Nador. Er ist vom ${a} bis ${b} da.`, perPick:"Nenn uns deinen Aufenthalt vor Ort",
+    perFrom:"Ankunft", perTo:"Abreise", perLive:"Ich wohne in Nador", perHere:(a,b)=>`Moe ist bis ${b} in Nador ✨`, perSoon:(a,b)=>`Moe ist vom ${a} bis ${b} wieder in Nador`, perAway:"Aktuell ist kein Zeitraum hinterlegt · schreib uns, wir melden uns bei dir.", perOutside:(a,b)=>`In diesem Zeitraum ist Moe leider nicht in Nador. Er ist vom ${a} bis ${b} da.`, perPick:"Nenn uns deinen Aufenthalt vor Ort",
     sumTitle:"Deine Anfrage", sumSvc:"Leistung", sumHair:"Dein Haar", sumPer:"Zeitraum", sumPhoto:"Foto folgt in WhatsApp 📷",
-    waNote:"WhatsApp öffnet sich mit deiner Anfrage – Moe antwortet dir persönlich.",
+    waNote:"WhatsApp öffnet sich mit deiner Anfrage · Moe antwortet dir persönlich.",
     next:"Weiter", back:"Zurück", send:"Anfrage senden", restart:"Von vorn beginnen",
     waIntro:"Neue Terminanfrage"},
   en:{dir:"ltr", flag:"🇬🇧", label:"English",
@@ -722,16 +722,16 @@ const T = {
     sumConfirm:"All correct?",
     onRequest:"on request", credited:"credited towards your booking",
     qTitle:{hairlen:"Tell us about your hair", colored:"Is your hair currently coloured?", pretreat:"Any previous treatments (straightening, colour …)?", change:"What would you like to change?"},
-    qSub:"Length, condition, your wish – anything that helps.",
+    qSub:"Length, condition, your wish · anything that helps.",
     qPlaceholder:"e.g. shoulder-length, coloured 3 months ago …",
-    photoHint:"A photo of your hair helps a lot – take one or upload one here.",
+    photoHint:"A photo of your hair helps a lot · take one or upload one here.",
     perTitle:"When are you in Nador?",
-    perSub:"Many of our clients are visiting – let us know your dates.",
-    perPlaceholder:"e.g. 15–25 August, mornings preferred …",
+    perSub:"Many of our clients are visiting · let us know your dates.",
+    perPlaceholder:"e.g. 15-25 August, mornings preferred …",
     chips:["This week","Next week","I live in Nador"],
-    perFrom:"Arrival", perTo:"Departure", perLive:"I live in Nador", perHere:(a,b)=>`Moe is in Nador until ${b} ✨`, perSoon:(a,b)=>`Moe will be back in Nador from ${a} to ${b}`, perAway:"No dates are set right now – write to us and we'll keep you posted.", perOutside:(a,b)=>`Moe isn't in Nador during this period. He's here from ${a} to ${b}.`, perPick:"Tell us your dates in town",
+    perFrom:"Arrival", perTo:"Departure", perLive:"I live in Nador", perHere:(a,b)=>`Moe is in Nador until ${b} ✨`, perSoon:(a,b)=>`Moe will be back in Nador from ${a} to ${b}`, perAway:"No dates are set right now · write to us and we'll keep you posted.", perOutside:(a,b)=>`Moe isn't in Nador during this period. He's here from ${a} to ${b}.`, perPick:"Tell us your dates in town",
     sumTitle:"Your request", sumSvc:"Service", sumHair:"Your hair", sumPer:"Period", sumPhoto:"Photo to follow in WhatsApp 📷",
-    waNote:"WhatsApp opens with your request – Moe will reply personally.",
+    waNote:"WhatsApp opens with your request · Moe will reply personally.",
     next:"Continue", back:"Back", send:"Send request", restart:"Start over",
     waIntro:"New appointment request"},
   es:{dir:"ltr", flag:"🇪🇸", label:"Español",
@@ -741,16 +741,16 @@ const T = {
     sumConfirm:"¿Todo correcto?",
     onRequest:"bajo petición", credited:"se descuenta al reservar",
     qTitle:{hairlen:"Cuéntanos sobre tu cabello", colored:"¿Tu cabello está teñido actualmente?", pretreat:"¿Has tenido tratamientos previos (alisado, tinte …)?", change:"¿Qué te gustaría cambiar?"},
-    qSub:"Largo, estado, tu deseo – todo lo que nos ayude.",
+    qSub:"Largo, estado, tu deseo · todo lo que nos ayude.",
     qPlaceholder:"Ej.: media melena, teñido hace 3 meses …",
-    photoHint:"Una foto de tu cabello nos ayuda mucho – haz una o sube una aquí.",
+    photoHint:"Una foto de tu cabello nos ayuda mucho · haz una o sube una aquí.",
     perTitle:"¿Cuándo estás en Nador?",
-    perSub:"Muchas de nuestras clientas están de visita – dinos tus fechas.",
+    perSub:"Muchas de nuestras clientas están de visita · dinos tus fechas.",
     perPlaceholder:"Ej.: del 15 al 25 de agosto, mejor por la mañana …",
     chips:["Esta semana","Próxima semana","Vivo en Nador"],
-    perFrom:"Llegada", perTo:"Salida", perLive:"Vivo en Nador", perHere:(a,b)=>`Moe está en Nador hasta el ${b} ✨`, perSoon:(a,b)=>`Moe estará de nuevo en Nador del ${a} al ${b}`, perAway:"Por ahora no hay fechas fijadas – escríbenos y te avisamos.", perOutside:(a,b)=>`En estas fechas Moe no está en Nador. Está del ${a} al ${b}.`, perPick:"Indícanos tus fechas en la ciudad",
+    perFrom:"Llegada", perTo:"Salida", perLive:"Vivo en Nador", perHere:(a,b)=>`Moe está en Nador hasta el ${b} ✨`, perSoon:(a,b)=>`Moe estará de nuevo en Nador del ${a} al ${b}`, perAway:"Por ahora no hay fechas fijadas · escríbenos y te avisamos.", perOutside:(a,b)=>`En estas fechas Moe no está en Nador. Está del ${a} al ${b}.`, perPick:"Indícanos tus fechas en la ciudad",
     sumTitle:"Tu solicitud", sumSvc:"Servicio", sumHair:"Tu cabello", sumPer:"Período", sumPhoto:"Foto por enviar en WhatsApp 📷",
-    waNote:"Se abre WhatsApp con tu solicitud – Moe te responde personalmente.",
+    waNote:"Se abre WhatsApp con tu solicitud · Moe te responde personalmente.",
     next:"Continuar", back:"Atrás", send:"Enviar solicitud", restart:"Empezar de nuevo",
     waIntro:"Nueva solicitud de cita"},
   nl:{dir:"ltr", flag:"🇳🇱", label:"Nederlands",
@@ -760,16 +760,16 @@ const T = {
     sumConfirm:"Klopt alles?",
     onRequest:"op aanvraag", credited:"verrekend bij boeking",
     qTitle:{hairlen:"Vertel ons over je haar", colored:"Is je haar momenteel gekleurd?", pretreat:"Eerdere behandelingen gehad (straightening, kleuring …)?", change:"Wat wil je veranderen?"},
-    qSub:"Lengte, conditie, je wens – alles wat ons helpt.",
+    qSub:"Lengte, conditie, je wens · alles wat ons helpt.",
     qPlaceholder:"bv. schouderlang, 3 maanden geleden gekleurd …",
-    photoHint:"Een foto van je haar helpt enorm – maak er een of upload er een hier.",
+    photoHint:"Een foto van je haar helpt enorm · maak er een of upload er een hier.",
     perTitle:"Wanneer ben je in Nador?",
-    perSub:"Veel van onze klanten zijn op bezoek – laat ons je periode weten.",
-    perPlaceholder:"bv. 15–25 augustus, liefst 's ochtends …",
+    perSub:"Veel van onze klanten zijn op bezoek · laat ons je periode weten.",
+    perPlaceholder:"bv. 15-25 augustus, liefst 's ochtends …",
     chips:["Deze week","Volgende week","Ik woon in Nador"],
-    perFrom:"Aankomst", perTo:"Vertrek", perLive:"Ik woon in Nador", perHere:(a,b)=>`Moe is tot ${b} in Nador ✨`, perSoon:(a,b)=>`Moe is van ${a} tot ${b} weer in Nador`, perAway:"Er zijn nu geen data ingesteld – schrijf ons, we houden je op de hoogte.", perOutside:(a,b)=>`In deze periode is Moe niet in Nador. Hij is er van ${a} tot ${b}.`, perPick:"Geef je periode ter plaatse door",
+    perFrom:"Aankomst", perTo:"Vertrek", perLive:"Ik woon in Nador", perHere:(a,b)=>`Moe is tot ${b} in Nador ✨`, perSoon:(a,b)=>`Moe is van ${a} tot ${b} weer in Nador`, perAway:"Er zijn nu geen data ingesteld · schrijf ons, we houden je op de hoogte.", perOutside:(a,b)=>`In deze periode is Moe niet in Nador. Hij is er van ${a} tot ${b}.`, perPick:"Geef je periode ter plaatse door",
     sumTitle:"Jouw aanvraag", sumSvc:"Behandeling", sumHair:"Je haar", sumPer:"Periode", sumPhoto:"Foto volgt in WhatsApp 📷",
-    waNote:"WhatsApp opent met je aanvraag – Moe antwoordt je persoonlijk.",
+    waNote:"WhatsApp opent met je aanvraag · Moe antwoordt je persoonlijk.",
     next:"Verder", back:"Terug", send:"Aanvraag versturen", restart:"Opnieuw beginnen",
     waIntro:"Nieuwe afspraakaanvraag"},
   da:{dir:"rtl", flag:"🇲🇦", label:"الدارجة",
@@ -779,16 +779,16 @@ const T = {
     sumConfirm:"كلشي مزيان؟",
     onRequest:"على الطلب", credited:"كتتحسب فالحجز",
     qTitle:{hairlen:"قولي لينا على شعرك", colored:"واش شعرك مصبوغ دابا؟", pretreat:"واش درتي شي معالجة من قبل (ليساج، صباغة …)؟", change:"شنو بغيتي تبدلي؟"},
-    qSub:"الطول، الحالة، اللي بغيتي – كلشي اللي يقدر يعاونا.",
+    qSub:"الطول، الحالة، اللي بغيتي · كلشي اللي يقدر يعاونا.",
     qPlaceholder:"مثلا: شعر متوسط، مصبوغ هادي 3 شهور …",
-    photoHint:"تصويرة ديال شعرك غادي تعاونا بزاف – صوري وحدة ولا زيدي وحدة من هنا.",
+    photoHint:"تصويرة ديال شعرك غادي تعاونا بزاف · صوري وحدة ولا زيدي وحدة من هنا.",
     perTitle:"إمتى غادي تكوني فالناظور؟",
-    perSub:"بزاف من الكليان ديالنا جايين فزيارة – قولي لينا الفترة ديالك.",
+    perSub:"بزاف من الكليان ديالنا جايين فزيارة · قولي لينا الفترة ديالك.",
     perPlaceholder:"مثلا: من 15 ل 25 غشت، الصباح أحسن …",
     chips:["هاد السيمانة","السيمانة الجاية","ساكنة فالناظور"],
-    perFrom:"الوصول", perTo:"المغادرة", perLive:"ساكنة فالناظور", perHere:(a,b)=>`مو فالناظور حتى ل ${b} ✨`, perSoon:(a,b)=>`مو غادي يكون فالناظور من ${a} حتى ${b}`, perAway:"دابا ماكايناش شي تواريخ – كتبي لينا وغادي نخبروك.", perOutside:(a,b)=>`فهاد الفترة مو ماشي فالناظور. كيكون من ${a} حتى ${b}.`, perPick:"قولي لينا الفترة ديالك فالمدينة",
+    perFrom:"الوصول", perTo:"المغادرة", perLive:"ساكنة فالناظور", perHere:(a,b)=>`مو فالناظور حتى ل ${b} ✨`, perSoon:(a,b)=>`مو غادي يكون فالناظور من ${a} حتى ${b}`, perAway:"دابا ماكايناش شي تواريخ · كتبي لينا وغادي نخبروك.", perOutside:(a,b)=>`فهاد الفترة مو ماشي فالناظور. كيكون من ${a} حتى ${b}.`, perPick:"قولي لينا الفترة ديالك فالمدينة",
     sumTitle:"الطلب ديالك", sumSvc:"الخدمة", sumHair:"الشعر ديالك", sumPer:"الفترة", sumPhoto:"التصويرة غادي تجي فواتساب 📷",
-    waNote:"غادي يتحل واتساب بالطلب ديالك – مو غادي يجاوبك شخصيا.",
+    waNote:"غادي يتحل واتساب بالطلب ديالك · مو غادي يجاوبك شخصيا.",
     next:"كمّل", back:"رجع", send:"صيفط الطلب", restart:"عاود من الأول",
     waIntro:"طلب موعد جديد"},
 };
@@ -812,12 +812,12 @@ const ICONS = {
 
 /* ── Menü- & Zusatz-Texte (Preise / Frage) ── */
 const M = {
-  fr:{intro:"Coucou, je suis Yara", introSub:"Je suis l'assistante digitale de Moe. Je vous aide à préparer votre demande rapidement. Par quoi commençons-nous ?", book:"Rendez-vous", bookSub:"Lancez votre demande en 2 minutes", prices:"Tarifs", pricesSub:"Toutes les prestations et les prix", question:"Questions", questionSub:"Réponses rapides & contact avec Moe", priceTitle:"Nos tarifs", bookNow:"Prendre rendez-vous", nadorNote:"Cette app concerne uniquement les rendez-vous et les informations pour Nador. Pour un rendez-vous en Allemagne, contactez Moe comme d'habitude.", igBtn:"Moe sur Instagram", doneTitle:"Ta demande est en route ✨", doneSub:"Moe te répondra personnellement sur WhatsApp. À très vite !", doneReopen:"WhatsApp ne s'est pas ouvert ? Touche ici", doneNew:"Nouvelle demande", a2hsTitle:"Ajoute Yara à ton écran d'accueil", a2hsIos:"Touche l'icône Partager (le carré avec une flèche vers le haut), puis « Sur l'écran d'accueil ».", a2hsAndroid:"Ouvre le menu (les trois points ⋮ en haut à droite), puis « Ajouter à l'écran d'accueil ».", a2hsClose:"Plus tard", cdHere:(n)=>`Moe est encore ${n} ${n===1?"jour":"jours"} à Nador`, cdLast:"Dernier jour de Moe à Nador aujourd'hui", cdSoon:(n)=>`Moe sera à Nador dans ${n} ${n===1?"jour":"jours"}`, faqTitle:"Questions fréquentes", faqSub:"Touchez une question pour voir la réponse.", notListed:"Ma question n'y est pas", qTitle:"Votre question", qSub:"Écrivez librement – votre message part directement à Moe sur WhatsApp.", qPlaceholder:"Ex. : Faites-vous les mariées ? Êtes-vous ouverts le dimanche ?…", qSendMoe:"Envoyer la question à Moe", menuBack:"Retour au menu"},
-  de:{intro:"Hi, ich bin Yara", introSub:"Ich bin Moes digitale Assistentin. Ich helfe dir, deine Anfrage schnell vorzubereiten. Womit starten wir?", book:"Termin", bookSub:"In 2 Minuten deine Anfrage starten", prices:"Preise", pricesSub:"Alle Leistungen und Preise im Überblick", question:"Fragen", questionSub:"Schnelle Antworten & Kontakt zu Moe", priceTitle:"Unsere Preise", bookNow:"Termin anfragen", nadorNote:"Diese App ist nur für Termine und Infos in Nador. Für einen Termin in Deutschland melde dich wie gewohnt direkt bei Moe.", igBtn:"Moe auf Instagram", doneTitle:"Deine Anfrage ist unterwegs ✨", doneSub:"Moe meldet sich persönlich bei dir auf WhatsApp. Bis bald!", doneReopen:"WhatsApp hat sich nicht geöffnet? Hier tippen", doneNew:"Neue Anfrage", a2hsTitle:"Yara auf den Startbildschirm legen", a2hsIos:"Tippe auf das Teilen-Symbol (Quadrat mit Pfeil nach oben) und dann auf „Zum Home-Bildschirm“.", a2hsAndroid:"Öffne das Menü (die drei Punkte ⋮ oben rechts) und dann „Zum Startbildschirm hinzufügen“.", a2hsClose:"Später", cdHere:(n)=>`Moe ist noch ${n} ${n===1?"Tag":"Tage"} in Nador`, cdLast:"Heute ist Moes letzter Tag in Nador", cdSoon:(n)=>`Moe ist in ${n} ${n===1?"Tag":"Tagen"} in Nador`, faqTitle:"Häufige Fragen", faqSub:"Tippe auf eine Frage, um die Antwort zu sehen.", notListed:"Meine Frage war nicht dabei", qTitle:"Deine Frage", qSub:"Schreib frei drauflos – deine Nachricht geht direkt an Moe auf WhatsApp.", qPlaceholder:"z. B. Macht ihr Braut-Styling? Habt ihr sonntags offen? …", qSendMoe:"Frage an Moe senden", menuBack:"Zurück zum Menü"},
-  en:{intro:"Hi, I'm Yara", introSub:"I'm Moe's digital assistant. I'll help you prepare your request quickly. Where shall we start?", book:"Booking", bookSub:"Start your request in 2 minutes", prices:"Prices", pricesSub:"All services and prices at a glance", question:"Questions", questionSub:"Quick answers & contact with Moe", priceTitle:"Our prices", bookNow:"Request appointment", nadorNote:"This app is only for appointments and info in Nador. For an appointment in Germany, contact Moe directly as usual.", igBtn:"Moe on Instagram", doneTitle:"Your request is on its way ✨", doneSub:"Moe will reply to you personally on WhatsApp. See you soon!", doneReopen:"WhatsApp didn't open? Tap here", doneNew:"New request", a2hsTitle:"Add Yara to your home screen", a2hsIos:"Tap the Share icon (the square with an arrow pointing up), then \"Add to Home Screen\".", a2hsAndroid:"Open the menu (the three dots ⋮ at the top right), then \"Add to Home screen\".", a2hsClose:"Later", cdHere:(n)=>`Moe is in Nador for ${n} more ${n===1?"day":"days"}`, cdLast:"Today is Moe's last day in Nador", cdSoon:(n)=>`Moe is in Nador in ${n} ${n===1?"day":"days"}`, faqTitle:"Frequent questions", faqSub:"Tap a question to see the answer.", notListed:"My question isn't here", qTitle:"Your question", qSub:"Write freely – your message goes straight to Moe on WhatsApp.", qPlaceholder:"e.g. Do you do bridal styling? Are you open on Sundays? …", qSendMoe:"Send question to Moe", menuBack:"Back to menu"},
-  es:{intro:"¡Hola! Soy Yara", introSub:"Soy la asistente digital de Moe. Te ayudo a preparar tu solicitud rápidamente. ¿Por dónde empezamos?", book:"Cita", bookSub:"Inicia tu solicitud en 2 minutos", prices:"Precios", pricesSub:"Todos los servicios y precios", question:"Preguntas", questionSub:"Respuestas rápidas y contacto con Moe", priceTitle:"Nuestros precios", bookNow:"Solicitar cita", nadorNote:"Esta app es solo para citas e información en Nador. Para una cita en Alemania, contacta con Moe directamente como siempre.", igBtn:"Moe en Instagram", doneTitle:"Tu solicitud está en camino ✨", doneSub:"Moe te responderá personalmente por WhatsApp. ¡Hasta pronto!", doneReopen:"¿No se abrió WhatsApp? Toca aquí", doneNew:"Nueva solicitud", a2hsTitle:"Añade Yara a tu pantalla de inicio", a2hsIos:"Toca el icono Compartir (el cuadrado con una flecha hacia arriba) y luego «Añadir a pantalla de inicio».", a2hsAndroid:"Abre el menú (los tres puntos ⋮ arriba a la derecha) y luego «Añadir a pantalla de inicio».", a2hsClose:"Más tarde", cdHere:(n)=>`Moe está ${n} ${n===1?"día":"días"} más en Nador`, cdLast:"Hoy es el último día de Moe en Nador", cdSoon:(n)=>`Moe estará en Nador en ${n} ${n===1?"día":"días"}`, faqTitle:"Preguntas frecuentes", faqSub:"Toca una pregunta para ver la respuesta.", notListed:"Mi pregunta no está aquí", qTitle:"Tu pregunta", qSub:"Escribe con libertad – tu mensaje va directo a Moe por WhatsApp.", qPlaceholder:"Ej.: ¿Hacéis peinados de novia? ¿Abrís los domingos? …", qSendMoe:"Enviar pregunta a Moe", menuBack:"Volver al menú"},
-  nl:{intro:"Hoi, ik ben Yara", introSub:"Ik ben Moe's digitale assistent. Ik help je je aanvraag snel voor te bereiden. Waarmee beginnen we?", book:"Afspraak", bookSub:"Start je aanvraag in 2 minuten", prices:"Prijzen", pricesSub:"Alle behandelingen en prijzen op een rij", question:"Vragen", questionSub:"Snelle antwoorden & contact met Moe", priceTitle:"Onze prijzen", bookNow:"Afspraak aanvragen", nadorNote:"Deze app is alleen voor afspraken en info in Nador. Voor een afspraak in Duitsland neem je zoals gewoonlijk direct contact op met Moe.", igBtn:"Moe op Instagram", doneTitle:"Je aanvraag is onderweg ✨", doneSub:"Moe reageert persoonlijk op je via WhatsApp. Tot snel!", doneReopen:"WhatsApp niet geopend? Tik hier", doneNew:"Nieuwe aanvraag", a2hsTitle:"Zet Yara op je startscherm", a2hsIos:"Tik op het deel-icoon (vierkant met pijl omhoog) en dan op \"Zet op beginscherm\".", a2hsAndroid:"Open het menu (de drie puntjes ⋮ rechtsboven) en dan \"Toevoegen aan startscherm\".", a2hsClose:"Later", cdHere:(n)=>`Moe is nog ${n} ${n===1?"dag":"dagen"} in Nador`, cdLast:"Vandaag is Moe's laatste dag in Nador", cdSoon:(n)=>`Moe is over ${n} ${n===1?"dag":"dagen"} in Nador`, faqTitle:"Veelgestelde vragen", faqSub:"Tik op een vraag om het antwoord te zien.", notListed:"Mijn vraag staat er niet bij", qTitle:"Jouw vraag", qSub:"Schrijf vrijuit – je bericht gaat direct naar Moe op WhatsApp.", qPlaceholder:"bv. Doen jullie bruidskapsels? Zijn jullie zondag open? …", qSendMoe:"Vraag aan Moe sturen", menuBack:"Terug naar menu"},
-  da:{intro:"سلام، أنا يارا", introSub:"أنا المساعدة الرقمية ديال مو. كنعاونك تجهزي طلبك بسرعة. بشنو نبداو؟", book:"موعد", bookSub:"بدي طلبك ف2 دقايق", prices:"الأثمنة", pricesSub:"جميع الخدمات والأثمنة", question:"أسئلة", questionSub:"أجوبة سريعة والتواصل مع مو", priceTitle:"الأثمنة ديالنا", bookNow:"طلب موعد", nadorNote:"هاد التطبيق غير للمواعيد والمعلومات فالناظور. إلا بغيتي موعد فألمانيا، تواصلي مع مو مباشرة بحال العادة.", igBtn:"مو على إنستغرام", doneTitle:"الطلب ديالك فالطريق ✨", doneSub:"مو غادي يجاوبك شخصيا فواتساب. نشوفوك قريب!", doneReopen:"واتساب ماتحلش؟ كليكي هنا", doneNew:"طلب جديد", a2hsTitle:"زيدي يارا لشاشة البداية", a2hsIos:"كليكي على أيقونة المشاركة (مربع فيه سهم لفوق)، من بعد «أضف إلى الشاشة الرئيسية».", a2hsAndroid:"حلي القائمة (النقط الثلاثة ⋮ لفوق على اليمين)، من بعد «إضافة إلى الشاشة الرئيسية».", a2hsClose:"من بعد", cdHere:(n)=>`مو باقي ${n} ${n===1?"نهار":"أيام"} فالناظور`, cdLast:"اليوم آخر نهار لمو فالناظور", cdSoon:(n)=>`مو غادي يكون فالناظور من بعد ${n} ${n===1?"نهار":"أيام"}`, faqTitle:"أسئلة كثيرة", faqSub:"كليكي على سؤال باش تشوفي الجواب.", notListed:"سؤالي ما كانش هنا", qTitle:"السؤال ديالك", qSub:"كتبي بحرية – الرسالة ديالك غادية نيشان لمو فواتساب.", qPlaceholder:"مثلا: واش كديرو تسريحات العروسة؟ واش خدامين نهار الحد؟ …", qSendMoe:"صيفطي السؤال لمو", menuBack:"رجوع للقائمة"},
+  fr:{intro:"Coucou, je suis Yara", introSub:"Je suis l'assistante digitale de Moe. Je vous aide à préparer votre demande rapidement. Par quoi commençons-nous ?", book:"Rendez-vous", bookSub:"Lancez votre demande en 2 minutes", prices:"Tarifs", pricesSub:"Toutes les prestations et les prix", question:"Questions", questionSub:"Réponses rapides & contact avec Moe", priceTitle:"Nos tarifs", bookNow:"Prendre rendez-vous", nadorNote:"Cette app concerne uniquement les rendez-vous et les informations pour Nador. Pour un rendez-vous en Allemagne, contactez Moe comme d'habitude.", igBtn:"Moe sur Instagram", doneTitle:"Ta demande est en route ✨", doneSub:"Moe te répondra personnellement sur WhatsApp. À très vite !", doneReopen:"WhatsApp ne s'est pas ouvert ? Touche ici", doneNew:"Nouvelle demande", a2hsTitle:"Ajoute Yara à ton écran d'accueil", a2hsIos:"Touche l'icône Partager (le carré avec une flèche vers le haut), puis « Sur l'écran d'accueil ».", a2hsAndroid:"Ouvre le menu (les trois points ⋮ en haut à droite), puis « Ajouter à l'écran d'accueil ».", a2hsClose:"Plus tard", cdHere:(n)=>`Moe est encore ${n} ${n===1?"jour":"jours"} à Nador`, cdLast:"Dernier jour de Moe à Nador aujourd'hui", cdSoon:(n)=>`Moe sera à Nador dans ${n} ${n===1?"jour":"jours"}`, faqTitle:"Questions fréquentes", faqSub:"Touchez une question pour voir la réponse.", notListed:"Ma question n'y est pas", qTitle:"Votre question", qSub:"Écrivez librement · votre message part directement à Moe sur WhatsApp.", qPlaceholder:"Ex. : Faites-vous les mariées ? Êtes-vous ouverts le dimanche ?…", qSendMoe:"Envoyer la question à Moe", menuBack:"Retour au menu"},
+  de:{intro:"Hi, ich bin Yara", introSub:"Ich bin Moes digitale Assistentin. Ich helfe dir, deine Anfrage schnell vorzubereiten. Womit starten wir?", book:"Termin", bookSub:"In 2 Minuten deine Anfrage starten", prices:"Preise", pricesSub:"Alle Leistungen und Preise im Überblick", question:"Fragen", questionSub:"Schnelle Antworten & Kontakt zu Moe", priceTitle:"Unsere Preise", bookNow:"Termin anfragen", nadorNote:"Diese App ist nur für Termine und Infos in Nador. Für einen Termin in Deutschland melde dich wie gewohnt direkt bei Moe.", igBtn:"Moe auf Instagram", doneTitle:"Deine Anfrage ist unterwegs ✨", doneSub:"Moe meldet sich persönlich bei dir auf WhatsApp. Bis bald!", doneReopen:"WhatsApp hat sich nicht geöffnet? Hier tippen", doneNew:"Neue Anfrage", a2hsTitle:"Yara auf den Startbildschirm legen", a2hsIos:"Tippe auf das Teilen-Symbol (Quadrat mit Pfeil nach oben) und dann auf „Zum Home-Bildschirm“.", a2hsAndroid:"Öffne das Menü (die drei Punkte ⋮ oben rechts) und dann „Zum Startbildschirm hinzufügen“.", a2hsClose:"Später", cdHere:(n)=>`Moe ist noch ${n} ${n===1?"Tag":"Tage"} in Nador`, cdLast:"Heute ist Moes letzter Tag in Nador", cdSoon:(n)=>`Moe ist in ${n} ${n===1?"Tag":"Tagen"} in Nador`, faqTitle:"Häufige Fragen", faqSub:"Tippe auf eine Frage, um die Antwort zu sehen.", notListed:"Meine Frage war nicht dabei", qTitle:"Deine Frage", qSub:"Schreib frei drauflos · deine Nachricht geht direkt an Moe auf WhatsApp.", qPlaceholder:"z. B. Macht ihr Braut-Styling? Habt ihr sonntags offen? …", qSendMoe:"Frage an Moe senden", menuBack:"Zurück zum Menü"},
+  en:{intro:"Hi, I'm Yara", introSub:"I'm Moe's digital assistant. I'll help you prepare your request quickly. Where shall we start?", book:"Booking", bookSub:"Start your request in 2 minutes", prices:"Prices", pricesSub:"All services and prices at a glance", question:"Questions", questionSub:"Quick answers & contact with Moe", priceTitle:"Our prices", bookNow:"Request appointment", nadorNote:"This app is only for appointments and info in Nador. For an appointment in Germany, contact Moe directly as usual.", igBtn:"Moe on Instagram", doneTitle:"Your request is on its way ✨", doneSub:"Moe will reply to you personally on WhatsApp. See you soon!", doneReopen:"WhatsApp didn't open? Tap here", doneNew:"New request", a2hsTitle:"Add Yara to your home screen", a2hsIos:"Tap the Share icon (the square with an arrow pointing up), then \"Add to Home Screen\".", a2hsAndroid:"Open the menu (the three dots ⋮ at the top right), then \"Add to Home screen\".", a2hsClose:"Later", cdHere:(n)=>`Moe is in Nador for ${n} more ${n===1?"day":"days"}`, cdLast:"Today is Moe's last day in Nador", cdSoon:(n)=>`Moe is in Nador in ${n} ${n===1?"day":"days"}`, faqTitle:"Frequent questions", faqSub:"Tap a question to see the answer.", notListed:"My question isn't here", qTitle:"Your question", qSub:"Write freely · your message goes straight to Moe on WhatsApp.", qPlaceholder:"e.g. Do you do bridal styling? Are you open on Sundays? …", qSendMoe:"Send question to Moe", menuBack:"Back to menu"},
+  es:{intro:"¡Hola! Soy Yara", introSub:"Soy la asistente digital de Moe. Te ayudo a preparar tu solicitud rápidamente. ¿Por dónde empezamos?", book:"Cita", bookSub:"Inicia tu solicitud en 2 minutos", prices:"Precios", pricesSub:"Todos los servicios y precios", question:"Preguntas", questionSub:"Respuestas rápidas y contacto con Moe", priceTitle:"Nuestros precios", bookNow:"Solicitar cita", nadorNote:"Esta app es solo para citas e información en Nador. Para una cita en Alemania, contacta con Moe directamente como siempre.", igBtn:"Moe en Instagram", doneTitle:"Tu solicitud está en camino ✨", doneSub:"Moe te responderá personalmente por WhatsApp. ¡Hasta pronto!", doneReopen:"¿No se abrió WhatsApp? Toca aquí", doneNew:"Nueva solicitud", a2hsTitle:"Añade Yara a tu pantalla de inicio", a2hsIos:"Toca el icono Compartir (el cuadrado con una flecha hacia arriba) y luego «Añadir a pantalla de inicio».", a2hsAndroid:"Abre el menú (los tres puntos ⋮ arriba a la derecha) y luego «Añadir a pantalla de inicio».", a2hsClose:"Más tarde", cdHere:(n)=>`Moe está ${n} ${n===1?"día":"días"} más en Nador`, cdLast:"Hoy es el último día de Moe en Nador", cdSoon:(n)=>`Moe estará en Nador en ${n} ${n===1?"día":"días"}`, faqTitle:"Preguntas frecuentes", faqSub:"Toca una pregunta para ver la respuesta.", notListed:"Mi pregunta no está aquí", qTitle:"Tu pregunta", qSub:"Escribe con libertad · tu mensaje va directo a Moe por WhatsApp.", qPlaceholder:"Ej.: ¿Hacéis peinados de novia? ¿Abrís los domingos? …", qSendMoe:"Enviar pregunta a Moe", menuBack:"Volver al menú"},
+  nl:{intro:"Hoi, ik ben Yara", introSub:"Ik ben Moe's digitale assistent. Ik help je je aanvraag snel voor te bereiden. Waarmee beginnen we?", book:"Afspraak", bookSub:"Start je aanvraag in 2 minuten", prices:"Prijzen", pricesSub:"Alle behandelingen en prijzen op een rij", question:"Vragen", questionSub:"Snelle antwoorden & contact met Moe", priceTitle:"Onze prijzen", bookNow:"Afspraak aanvragen", nadorNote:"Deze app is alleen voor afspraken en info in Nador. Voor een afspraak in Duitsland neem je zoals gewoonlijk direct contact op met Moe.", igBtn:"Moe op Instagram", doneTitle:"Je aanvraag is onderweg ✨", doneSub:"Moe reageert persoonlijk op je via WhatsApp. Tot snel!", doneReopen:"WhatsApp niet geopend? Tik hier", doneNew:"Nieuwe aanvraag", a2hsTitle:"Zet Yara op je startscherm", a2hsIos:"Tik op het deel-icoon (vierkant met pijl omhoog) en dan op \"Zet op beginscherm\".", a2hsAndroid:"Open het menu (de drie puntjes ⋮ rechtsboven) en dan \"Toevoegen aan startscherm\".", a2hsClose:"Later", cdHere:(n)=>`Moe is nog ${n} ${n===1?"dag":"dagen"} in Nador`, cdLast:"Vandaag is Moe's laatste dag in Nador", cdSoon:(n)=>`Moe is over ${n} ${n===1?"dag":"dagen"} in Nador`, faqTitle:"Veelgestelde vragen", faqSub:"Tik op een vraag om het antwoord te zien.", notListed:"Mijn vraag staat er niet bij", qTitle:"Jouw vraag", qSub:"Schrijf vrijuit · je bericht gaat direct naar Moe op WhatsApp.", qPlaceholder:"bv. Doen jullie bruidskapsels? Zijn jullie zondag open? …", qSendMoe:"Vraag aan Moe sturen", menuBack:"Terug naar menu"},
+  da:{intro:"سلام، أنا يارا", introSub:"أنا المساعدة الرقمية ديال مو. كنعاونك تجهزي طلبك بسرعة. بشنو نبداو؟", book:"موعد", bookSub:"بدي طلبك ف2 دقايق", prices:"الأثمنة", pricesSub:"جميع الخدمات والأثمنة", question:"أسئلة", questionSub:"أجوبة سريعة والتواصل مع مو", priceTitle:"الأثمنة ديالنا", bookNow:"طلب موعد", nadorNote:"هاد التطبيق غير للمواعيد والمعلومات فالناظور. إلا بغيتي موعد فألمانيا، تواصلي مع مو مباشرة بحال العادة.", igBtn:"مو على إنستغرام", doneTitle:"الطلب ديالك فالطريق ✨", doneSub:"مو غادي يجاوبك شخصيا فواتساب. نشوفوك قريب!", doneReopen:"واتساب ماتحلش؟ كليكي هنا", doneNew:"طلب جديد", a2hsTitle:"زيدي يارا لشاشة البداية", a2hsIos:"كليكي على أيقونة المشاركة (مربع فيه سهم لفوق)، من بعد «أضف إلى الشاشة الرئيسية».", a2hsAndroid:"حلي القائمة (النقط الثلاثة ⋮ لفوق على اليمين)، من بعد «إضافة إلى الشاشة الرئيسية».", a2hsClose:"من بعد", cdHere:(n)=>`مو باقي ${n} ${n===1?"نهار":"أيام"} فالناظور`, cdLast:"اليوم آخر نهار لمو فالناظور", cdSoon:(n)=>`مو غادي يكون فالناظور من بعد ${n} ${n===1?"نهار":"أيام"}`, faqTitle:"أسئلة كثيرة", faqSub:"كليكي على سؤال باش تشوفي الجواب.", notListed:"سؤالي ما كانش هنا", qTitle:"السؤال ديالك", qSub:"كتبي بحرية · الرسالة ديالك غادية نيشان لمو فواتساب.", qPlaceholder:"مثلا: واش كديرو تسريحات العروسة؟ واش خدامين نهار الحد؟ …", qSendMoe:"صيفطي السؤال لمو", menuBack:"رجوع للقائمة"},
 };
 
 /* Reihenfolge der Sprach-Kacheln */
@@ -825,34 +825,34 @@ const LANG_ORDER = ["da","fr","de","en","es","nl"];
 
 /* ── Foto-Upload-Texte ── */
 const P = {
-  fr:{laterNote:"Pas de photo sous la main ? Aucun souci – tu peux aussi l'envoyer plus tard sur WhatsApp.", change:"Changer", uploading:"Envoi de la photo…", fail:"L'envoi de la photo a échoué – vous pourrez l'ajouter directement dans WhatsApp.", optional:"facultatif",
-      curTitle:"Photo de vos cheveux actuels", curSub:"De face ou de dos – ça nous aide beaucoup.",
+  fr:{laterNote:"Pas de photo sous la main ? Aucun souci · tu peux aussi l'envoyer plus tard sur WhatsApp.", change:"Changer", uploading:"Envoi de la photo…", fail:"L'envoi de la photo a échoué · vous pourrez l'ajouter directement dans WhatsApp.", optional:"facultatif",
+      curTitle:"Photo de vos cheveux actuels", curSub:"De face ou de dos · ça nous aide beaucoup.",
       wishTitle:"Résultat souhaité", wishSub:"Une inspiration, une photo qui vous plaît.",
       sumCur:"Cheveux actuels ✓", sumWish:"Inspiration ✓"},
-  de:{laterNote:"Kein passendes Foto zur Hand? Kein Problem – du kannst es auch später in WhatsApp nachreichen.", change:"Ändern", uploading:"Foto wird hochgeladen…", fail:"Foto-Upload hat nicht geklappt – du kannst es direkt in WhatsApp anhängen.", optional:"optional",
-      curTitle:"Foto von deinem Haar jetzt", curSub:"Vorn oder hinten – hilft uns sehr.",
+  de:{laterNote:"Kein passendes Foto zur Hand? Kein Problem · du kannst es auch später in WhatsApp nachreichen.", change:"Ändern", uploading:"Foto wird hochgeladen…", fail:"Foto-Upload hat nicht geklappt · du kannst es direkt in WhatsApp anhängen.", optional:"optional",
+      curTitle:"Foto von deinem Haar jetzt", curSub:"Vorn oder hinten · hilft uns sehr.",
       wishTitle:"Wunschergebnis", wishSub:"Eine Inspiration, ein Look der dir gefällt.",
       sumCur:"Aktuelles Haar ✓", sumWish:"Inspiration ✓"},
-  en:{laterNote:"No photo to hand? No problem – you can also send it later on WhatsApp.", change:"Change", uploading:"Uploading photo…", fail:"Photo upload failed – you can attach it directly in WhatsApp.", optional:"optional",
-      curTitle:"Photo of your hair now", curSub:"Front or back – it helps us a lot.",
+  en:{laterNote:"No photo to hand? No problem · you can also send it later on WhatsApp.", change:"Change", uploading:"Uploading photo…", fail:"Photo upload failed · you can attach it directly in WhatsApp.", optional:"optional",
+      curTitle:"Photo of your hair now", curSub:"Front or back · it helps us a lot.",
       wishTitle:"Desired result", wishSub:"An inspiration, a look you like.",
       sumCur:"Current hair ✓", sumWish:"Inspiration ✓"},
-  es:{laterNote:"¿No tienes una foto a mano? Sin problema – también puedes enviarla después por WhatsApp.", change:"Cambiar", uploading:"Subiendo la foto…", fail:"No se pudo subir la foto – puedes adjuntarla directamente en WhatsApp.", optional:"opcional",
-      curTitle:"Foto de tu cabello ahora", curSub:"De frente o de espaldas – nos ayuda mucho.",
+  es:{laterNote:"¿No tienes una foto a mano? Sin problema · también puedes enviarla después por WhatsApp.", change:"Cambiar", uploading:"Subiendo la foto…", fail:"No se pudo subir la foto · puedes adjuntarla directamente en WhatsApp.", optional:"opcional",
+      curTitle:"Foto de tu cabello ahora", curSub:"De frente o de espaldas · nos ayuda mucho.",
       wishTitle:"Resultado deseado", wishSub:"Una inspiración, un look que te guste.",
       sumCur:"Cabello actual ✓", sumWish:"Inspiración ✓"},
-  nl:{laterNote:"Geen foto bij de hand? Geen probleem – je kunt hem ook later in WhatsApp nasturen.", change:"Wijzigen", uploading:"Foto uploaden…", fail:"Uploaden mislukt – je kunt de foto direct in WhatsApp meesturen.", optional:"optioneel",
-      curTitle:"Foto van je haar nu", curSub:"Voor- of achterkant – helpt ons enorm.",
+  nl:{laterNote:"Geen foto bij de hand? Geen probleem · je kunt hem ook later in WhatsApp nasturen.", change:"Wijzigen", uploading:"Foto uploaden…", fail:"Uploaden mislukt · je kunt de foto direct in WhatsApp meesturen.", optional:"optioneel",
+      curTitle:"Foto van je haar nu", curSub:"Voor- of achterkant · helpt ons enorm.",
       wishTitle:"Gewenst resultaat", wishSub:"Een inspiratie, een look die je mooi vindt.",
       sumCur:"Huidige haar ✓", sumWish:"Inspiratie ✓"},
-  da:{laterNote:"ماعندكش تصويرة دابا؟ ماكاين مشكل – تقدري تصيفطيها من بعد فواتساب.", change:"بدّلي", uploading:"كنصيفطو التصويرة…", fail:"ما مشاتش التصويرة – تقدري تصيفطيها مباشرة فواتساب.", optional:"اختياري",
-      curTitle:"تصويرة ديال شعرك دابا", curSub:"من قدام ولا من اللور – كتعاونا بزاف.",
+  da:{laterNote:"ماعندكش تصويرة دابا؟ ماكاين مشكل · تقدري تصيفطيها من بعد فواتساب.", change:"بدّلي", uploading:"كنصيفطو التصويرة…", fail:"ما مشاتش التصويرة · تقدري تصيفطيها مباشرة فواتساب.", optional:"اختياري",
+      curTitle:"تصويرة ديال شعرك دابا", curSub:"من قدام ولا من اللور · كتعاونا بزاف.",
       wishTitle:"النتيجة اللي بغيتي", wishSub:"شي إلهام، شي لوك عجبك.",
       sumCur:"الشعر ديالك دابا ✓", sumWish:"إلهام ✓"},
 };
 
 /* ── State ── */
-let state = {lang:null, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:"", lastWaLink:null};
+let state = {lang:null, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:"", phone:"", lastWaLink:null};
 let step = 0; // 0 Sprache · 1 Service · 2 Haar · 3 Zeitraum · 4 Zusammenfassung
 
 const app = document.getElementById("app");
@@ -863,7 +863,7 @@ function t(){ return T[state.lang] || T.en; }
 /* Sanftes haptisches Feedback (nur wo vom Gerät unterstützt) */
 function buzz(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
 
-/* "Zum Startbildschirm hinzufügen"-Hinweis – plattformgerecht, einmalig, nicht im App-Modus */
+/* "Zum Startbildschirm hinzufügen"-Hinweis · plattformgerecht, einmalig, nicht im App-Modus */
 function isStandalone(){
   try{ return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true; }catch(e){ return false; }
 }
@@ -944,7 +944,7 @@ function renderLang(){
   app.appendChild(el);
 }
 
-/* ── Schritt 1: Menü – Yara stellt sich vor ── */
+/* ── Schritt 1: Menü · Yara stellt sich vor ── */
 function renderMenu(){
   const ML = m();
   const el = document.createElement("section");
@@ -1010,7 +1010,7 @@ function renderPrices(){
         let price;
         if(s.pS===null) price = L.onRequest;
         else if(s.pL===null) price = `${s.pS} MAD`;
-        else price = `${s.pS}–${s.pL} MAD`;
+        else price = `${s.pS}-${s.pL} MAD`;
         return `<div class="pt-row">
           <span class="pt-name">${svcName(s)}<small>${s.dur[state.lang]||s.dur.en}</small></span>
           <span class="pt-price">${price}</span>
@@ -1056,7 +1056,7 @@ function renderQuestion(){
     };
   });
 
-  /* Freitext-Bereich erst auf Wunsch – geht dann an Moe */
+  /* Freitext-Bereich erst auf Wunsch · geht dann an Moe */
   const ft = el.querySelector("#freetext");
   el.querySelector("#notListed").onclick = ()=>{
     el.querySelector("#notListed").style.display = "none";
@@ -1103,7 +1103,7 @@ function renderService(){
         let price;
         if(s.pS===null) price = L.onRequest;
         else if(s.pL===null) price = `${s.pS} MAD · ${L.credited}`;
-        else price = `${s.pS}–${s.pL} MAD`;
+        else price = `${s.pS}-${s.pL} MAD`;
         return `
         <button class="svc ${state.service===s.id?"selected":""}" data-id="${s.id}">
           <span class="ico">${ICONS[s.id]||""}</span>
@@ -1126,7 +1126,7 @@ function renderService(){
       el.querySelectorAll(".svc").forEach(x=>x.classList.remove("selected"));
       b.classList.add("selected");
       el.querySelector("#next").disabled = false;
-      /* Nach kurzer Bestätigung automatisch weiter – kein Scrollen zum Button nötig */
+      /* Nach kurzer Bestätigung automatisch weiter · kein Scrollen zum Button nötig */
       setTimeout(()=>{ step=3; render(); }, 260);
     };
   });
@@ -1294,7 +1294,7 @@ function renderPeriod(){
   }
   function composePeriod(){
     if(state.dFrom && state.dTo){
-      state.period = `${fmtDate(state.dFrom)} – ${fmtDate(state.dTo)}`;
+      state.period = `${fmtDate(state.dFrom)} - ${fmtDate(state.dTo)}`;
     } else state.period = "";
   }
   dFrom.onchange = ()=>{
@@ -1353,6 +1353,9 @@ function renderSummary(){
     <div class="step-body" style="margin-top:14px">
       <label style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--champagne)" for="cname">${(WA[state.lang]||WA.en).nameLabel}</label>
       <input type="text" id="cname" placeholder="${(WA[state.lang]||WA.en).namePh}" value="${esc(state.name||"")}" autocomplete="given-name">
+      <label style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--champagne);margin-top:6px" for="cphone">${(WA[state.lang]||WA.en).phoneLabel}</label>
+      <input type="tel" id="cphone" placeholder="${(WA[state.lang]||WA.en).phonePh}" value="${esc(state.phone||"")}" autocomplete="tel" inputmode="tel">
+      <p class="hint" style="margin-top:-4px"><span>${(WA[state.lang]||WA.en).phoneHint}</span></p>
     </div>
     <div class="actions">
       <div id="errBox"></div>
@@ -1366,6 +1369,8 @@ function renderSummary(){
   const sendBtn = el.querySelector("#send");
   const nameInp = el.querySelector("#cname");
   nameInp.oninput = ()=>{ state.name = nameInp.value; };
+  const phoneInp = el.querySelector("#cphone");
+  phoneInp.oninput = ()=>{ state.phone = phoneInp.value; };
   let busy = false;
   sendBtn.onclick = async (e)=>{
     e.preventDefault();
@@ -1392,7 +1397,7 @@ function renderSummary(){
     step = "done"; render();
   };
   el.querySelector("#restart").onclick = ()=>{
-    state = {lang:state.lang, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:state.name};
+    state = {lang:state.lang, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:state.name, phone:state.phone};
     step = 1; render();
   };
   app.appendChild(el);
@@ -1416,7 +1421,7 @@ function renderDone(){
       <button class="btn btn-primary" id="again">${ML.doneNew}</button>
     </div>`;
   el.querySelector("#again").onclick = ()=>{
-    state = {lang:state.lang, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:state.name, lastWaLink:null};
+    state = {lang:state.lang, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:state.name, phone:state.phone, lastWaLink:null};
     step = 1; render();
   };
   app.appendChild(el);
@@ -1425,12 +1430,12 @@ function renderDone(){
 /* Nachricht an Moe: deutsche Labels (er liest deutsch), Kundendaten im Original */
 /* ── WhatsApp-Nachrichten aus Sicht der Kundin (warm, high-class, ihre Sprache) ── */
 const WA = {
-  de:{greet:"Hallo Moe, ich würde gerne einen Termin anfragen ✨", lService:"Leistung", lPeriod:"Zeitraum", lHair:"Mein Haar", lPhoto:"Foto aktuell", lWish:"Wunschergebnis", photoNote:"Ich schicke dir gleich ein Foto 📷", qGreet:"Hallo Moe, ich hätte eine Frage ✨", nameLabel:"Dein Name (optional)", namePh:"z. B. Anna"},
-  fr:{greet:"Bonjour Moe, j'aimerais prendre rendez-vous ✨", lService:"Prestation", lPeriod:"Période", lHair:"Mes cheveux", lPhoto:"Photo actuelle", lWish:"Résultat souhaité", photoNote:"Je t'envoie une photo juste après 📷", qGreet:"Bonjour Moe, j'aurais une question ✨", nameLabel:"Votre prénom (facultatif)", namePh:"ex. : Anna"},
-  en:{greet:"Hi Moe, I'd love to request an appointment ✨", lService:"Service", lPeriod:"When", lHair:"My hair", lPhoto:"Current photo", lWish:"Desired result", photoNote:"I'll send a photo right after 📷", qGreet:"Hi Moe, I have a little question ✨", nameLabel:"Your name (optional)", namePh:"e.g. Anna"},
-  es:{greet:"Hola Moe, me gustaría pedir una cita ✨", lService:"Servicio", lPeriod:"Fechas", lHair:"Mi cabello", lPhoto:"Foto actual", lWish:"Resultado deseado", photoNote:"Te envío una foto enseguida 📷", qGreet:"Hola Moe, tengo una pregunta ✨", nameLabel:"Tu nombre (opcional)", namePh:"Ej.: Anna"},
-  nl:{greet:"Hoi Moe, ik wil graag een afspraak aanvragen ✨", lService:"Behandeling", lPeriod:"Periode", lHair:"Mijn haar", lPhoto:"Foto nu", lWish:"Gewenst resultaat", photoNote:"Ik stuur zo een foto 📷", qGreet:"Hoi Moe, ik heb een vraagje ✨", nameLabel:"Je naam (optioneel)", namePh:"bv. Anna"},
-  da:{greet:"سلام مو، بغيت ناخد موعد ✨", lService:"الخدمة", lPeriod:"الفترة", lHair:"شعري", lPhoto:"صورة دابا", lWish:"النتيجة المطلوبة", photoNote:"غادي نصيفط ليك تصويرة دابا 📷", qGreet:"سلام مو، عندي سؤال صغير ✨", nameLabel:"سميتك (اختياري)", namePh:"مثلا: أمينة"},
+  de:{greet:"Hallo Moe, ich würde gerne einen Termin anfragen ✨", lService:"Leistung", lPeriod:"Zeitraum", lHair:"Mein Haar", lPhoto:"Foto aktuell", lWish:"Wunschergebnis", photoNote:"Ich schicke dir gleich ein Foto 📷", qGreet:"Hallo Moe, ich hätte eine Frage ✨", nameLabel:"Dein Name (optional)", namePh:"z. B. Anna", phoneLabel:"WhatsApp-Nummer (optional)", phonePh:"z. B. +49 170 …", phoneHint:"Für deine Terminbestätigung · Moe erreicht dich sonst über deinen Chat."},
+  fr:{greet:"Bonjour Moe, j'aimerais prendre rendez-vous ✨", lService:"Prestation", lPeriod:"Période", lHair:"Mes cheveux", lPhoto:"Photo actuelle", lWish:"Résultat souhaité", photoNote:"Je t'envoie une photo juste après 📷", qGreet:"Bonjour Moe, j'aurais une question ✨", nameLabel:"Votre prénom (facultatif)", namePh:"ex. : Anna", phoneLabel:"Numéro WhatsApp (facultatif)", phonePh:"ex. : +33 6 …", phoneHint:"Pour ta confirmation de rendez-vous · sinon Moe te joint via ton chat."},
+  en:{greet:"Hi Moe, I'd love to request an appointment ✨", lService:"Service", lPeriod:"When", lHair:"My hair", lPhoto:"Current photo", lWish:"Desired result", photoNote:"I'll send a photo right after 📷", qGreet:"Hi Moe, I have a little question ✨", nameLabel:"Your name (optional)", namePh:"e.g. Anna", phoneLabel:"WhatsApp number (optional)", phonePh:"e.g. +44 7 …", phoneHint:"For your appointment confirmation · otherwise Moe reaches you via your chat."},
+  es:{greet:"Hola Moe, me gustaría pedir una cita ✨", lService:"Servicio", lPeriod:"Fechas", lHair:"Mi cabello", lPhoto:"Foto actual", lWish:"Resultado deseado", photoNote:"Te envío una foto enseguida 📷", qGreet:"Hola Moe, tengo una pregunta ✨", nameLabel:"Tu nombre (opcional)", namePh:"Ej.: Anna", phoneLabel:"Número de WhatsApp (opcional)", phonePh:"Ej.: +34 6 …", phoneHint:"Para tu confirmación de cita · si no, Moe te contacta por tu chat."},
+  nl:{greet:"Hoi Moe, ik wil graag een afspraak aanvragen ✨", lService:"Behandeling", lPeriod:"Periode", lHair:"Mijn haar", lPhoto:"Foto nu", lWish:"Gewenst resultaat", photoNote:"Ik stuur zo een foto 📷", qGreet:"Hoi Moe, ik heb een vraagje ✨", nameLabel:"Je naam (optioneel)", namePh:"bv. Anna", phoneLabel:"WhatsApp-nummer (optioneel)", phonePh:"bv. +31 6 …", phoneHint:"Voor je afspraakbevestiging · anders bereikt Moe je via je chat."},
+  da:{greet:"سلام مو، بغيت ناخد موعد ✨", lService:"الخدمة", lPeriod:"الفترة", lHair:"شعري", lPhoto:"صورة دابا", lWish:"النتيجة المطلوبة", photoNote:"غادي نصيفط ليك تصويرة دابا 📷", qGreet:"سلام مو، عندي سؤال صغير ✨", nameLabel:"سميتك (اختياري)", namePh:"مثلا: أمينة", phoneLabel:"رقم واتساب (اختياري)", phonePh:"مثلا: +212 6 …", phoneHint:"باش يوصلك تأكيد الموعد · وإلا مو كيوصلك عبر الشات ديالك."},
 };
 
 function buildWaText(){
@@ -1507,7 +1512,7 @@ function logToSheet(){
         photo_url: state.photoUrl || "",
         wish_photo_url: state.wishUrl || "",
         customer_name: (state.name||"").trim(),
-        customer_phone: "",
+        customer_phone: (state.phone||"").trim(),
         whatsapp_message: buildWaText(),
         conversation_status: "REQUEST_SENT"
       })
@@ -1531,7 +1536,7 @@ function esc(str){
   }
 })();
 
-/* Verfügbarkeit laden – erst danach rendern. Schlägt es fehl, läuft die App
+/* Verfügbarkeit laden · erst danach rendern. Schlägt es fehl, läuft die App
    ohne Datumslimit weiter (Fallback: Kundin kann jeden Zeitraum wählen). */
 fetch("verfuegbarkeit.json", {cache:"no-store"})
   .then(r=>r.ok ? r.json() : null)
