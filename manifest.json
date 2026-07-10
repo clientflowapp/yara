@@ -1,0 +1,17 @@
+{
+  "name": "moe lamkaddam",
+  "short_name": "moe lamkaddam",
+  "description": "Private Boutique Salon · Nador – Termine & Infos mit Yara",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7efe9",
+  "theme_color": "#33202e",
+  "lang": "de",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
