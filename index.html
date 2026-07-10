@@ -43,7 +43,9 @@ header{
   text-align:center;
 }
 .brand-logo{
-  max-height:92px;max-width:88%;width:auto;
+  width:min(72%, 320px);
+  max-height:150px;
+  height:auto;
   object-fit:contain;margin:0 auto;display:block;
 }
 .brand{
@@ -336,11 +338,16 @@ textarea:focus, input:focus{outline:2px solid var(--copper);outline-offset:1px;b
   margin:0 auto 10px;
   letter-spacing:.02em;
 }
-.yara-avatar{
-  width:76px;height:76px;border-radius:50%;
-  object-fit:cover;display:block;margin:0 auto 12px;
+.yara-avatar-wrap{
+  width:96px;height:96px;border-radius:50%;overflow:hidden;
+  margin:0 auto 12px;
   box-shadow:0 6px 18px rgba(51,32,46,.18);
   border:2px solid var(--white);
+}
+.yara-avatar{
+  width:100%;height:100%;display:block;
+  object-fit:cover;object-position:center 20%;
+  transform:scale(1.4);transform-origin:center 20%;
 }
 .menu-list{display:flex;flex-direction:column;gap:12px;margin-top:8px}
 .menu-btn{
@@ -668,7 +675,7 @@ const P = {
 };
 
 /* ── State ── */
-let state = {lang:null, service:null, hair:"", period:"", photoData:null, photoUrl:null};
+let state = {lang:null, service:null, hair:"", period:"", photoData:null, photoUrl:null, name:""};
 let step = 0; // 0 Sprache · 1 Service · 2 Haar · 3 Zeitraum · 4 Zusammenfassung
 
 const app = document.getElementById("app");
@@ -724,8 +731,10 @@ function renderMenu(){
   el.className = "step active";
   el.innerHTML = `
     <div class="yara-intro">
-      <img class="yara-avatar" id="yaraAvatar" alt="Yara" src=""
-           onerror="this.style.display='none';document.getElementById('yaraMark').style.display='flex'">
+      <div class="yara-avatar-wrap" id="yaraWrap">
+        <img class="yara-avatar" id="yaraAvatar" alt="Yara" src=""
+             onerror="document.getElementById('yaraWrap').style.display='none';document.getElementById('yaraMark').style.display='flex'">
+      </div>
       <div class="yara-mark" id="yaraMark" style="display:none">Y</div>
       <h2 class="step-title" style="margin-top:0">${ML.intro}</h2>
       <p class="step-sub" style="margin-bottom:6px">${ML.introSub}</p>
@@ -757,7 +766,7 @@ function renderMenu(){
   el.querySelector("#back").onclick = ()=>{ step=0; render(); };
   app.appendChild(el);
   const av = el.querySelector("#yaraAvatar");
-  if(YARA_AVATAR){ av.src = YARA_AVATAR; } else { av.style.display="none"; el.querySelector("#yaraMark").style.display="flex"; }
+  if(YARA_AVATAR){ av.src = YARA_AVATAR; } else { el.querySelector("#yaraWrap").style.display="none"; el.querySelector("#yaraMark").style.display="flex"; }
 }
 
 /* ── Preise: Übersicht aller Leistungen ── */
@@ -1017,6 +1026,10 @@ function renderSummary(){
       </div>`
       : (s.photo?`<div class="sc-row"><div class="sc-value" style="font-size:.85rem;color:var(--plum-soft)">${L.sumPhoto}</div></div>`:"")}
     </div>
+    <div class="step-body" style="margin-top:14px">
+      <label style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--champagne)" for="cname">${(WA[state.lang]||WA.en).nameLabel}</label>
+      <input type="text" id="cname" placeholder="${(WA[state.lang]||WA.en).namePh}" value="${esc(state.name||"")}" autocomplete="given-name">
+    </div>
     <div class="actions">
       <div id="errBox"></div>
       <p class="wa-note">${L.waNote}</p>
@@ -1027,6 +1040,8 @@ function renderSummary(){
       <button class="btn btn-ghost" id="restart">🔄 ${L.restart}</button>
     </div>`;
   const sendBtn = el.querySelector("#send");
+  const nameInp = el.querySelector("#cname");
+  nameInp.oninput = ()=>{ state.name = nameInp.value; };
   let busy = false;
   sendBtn.onclick = async (e)=>{
     e.preventDefault();
@@ -1047,7 +1062,7 @@ function renderSummary(){
     window.open(buildWaLink(), "_blank");
   };
   el.querySelector("#restart").onclick = ()=>{
-    state = {lang:state.lang, service:null, hair:"", period:"", photoData:null, photoUrl:null};
+    state = {lang:state.lang, service:null, hair:"", period:"", photoData:null, photoUrl:null, name:state.name};
     step = 1; render();
   };
   app.appendChild(el);
@@ -1056,15 +1071,15 @@ function renderSummary(){
 /* Nachricht an Moe: deutsche Labels (er liest deutsch), Kundendaten im Original */
 /* ── WhatsApp-Nachrichten aus Sicht der Kundin (warm, high-class, ihre Sprache) ── */
 const WA = {
-  de:{greet:"Hallo Moe, ich würde gerne einen Termin anfragen ✨", lService:"Leistung", lPeriod:"Zeitraum", lHair:"Mein Haar", lPhoto:"Foto", photoNote:"Ich schicke dir gleich ein Foto 📷", qGreet:"Hallo Moe, ich hätte eine Frage ✨"},
-  fr:{greet:"Bonjour Moe, j'aimerais prendre rendez-vous ✨", lService:"Prestation", lPeriod:"Période", lHair:"Mes cheveux", lPhoto:"Photo", photoNote:"Je t'envoie une photo juste après 📷", qGreet:"Bonjour Moe, j'aurais une question ✨"},
-  en:{greet:"Hi Moe, I'd love to request an appointment ✨", lService:"Service", lPeriod:"When", lHair:"My hair", lPhoto:"Photo", photoNote:"I'll send a photo right after 📷", qGreet:"Hi Moe, I have a little question ✨"},
-  es:{greet:"Hola Moe, me gustaría pedir una cita ✨", lService:"Servicio", lPeriod:"Fechas", lHair:"Mi cabello", lPhoto:"Foto", photoNote:"Te envío una foto enseguida 📷", qGreet:"Hola Moe, tengo una pregunta ✨"},
-  nl:{greet:"Hoi Moe, ik wil graag een afspraak aanvragen ✨", lService:"Behandeling", lPeriod:"Periode", lHair:"Mijn haar", lPhoto:"Foto", photoNote:"Ik stuur zo een foto 📷", qGreet:"Hoi Moe, ik heb een vraagje ✨"},
-  da:{greet:"سلام مو، بغيت ناخد موعد ✨", lService:"الخدمة", lPeriod:"الفترة", lHair:"شعري", lPhoto:"صورة", photoNote:"غادي نصيفط ليك تصويرة دابا 📷", qGreet:"سلام مو، عندي سؤال صغير ✨"},
+  de:{greet:"Hallo Moe, ich würde gerne einen Termin anfragen ✨", lService:"Leistung", lPeriod:"Zeitraum", lHair:"Mein Haar", lPhoto:"Foto", photoNote:"Ich schicke dir gleich ein Foto 📷", qGreet:"Hallo Moe, ich hätte eine Frage ✨", nameLabel:"Dein Name (optional)", namePh:"z. B. Anna"},
+  fr:{greet:"Bonjour Moe, j'aimerais prendre rendez-vous ✨", lService:"Prestation", lPeriod:"Période", lHair:"Mes cheveux", lPhoto:"Photo", photoNote:"Je t'envoie une photo juste après 📷", qGreet:"Bonjour Moe, j'aurais une question ✨", nameLabel:"Votre prénom (facultatif)", namePh:"ex. : Anna"},
+  en:{greet:"Hi Moe, I'd love to request an appointment ✨", lService:"Service", lPeriod:"When", lHair:"My hair", lPhoto:"Photo", photoNote:"I'll send a photo right after 📷", qGreet:"Hi Moe, I have a little question ✨", nameLabel:"Your name (optional)", namePh:"e.g. Anna"},
+  es:{greet:"Hola Moe, me gustaría pedir una cita ✨", lService:"Servicio", lPeriod:"Fechas", lHair:"Mi cabello", lPhoto:"Foto", photoNote:"Te envío una foto enseguida 📷", qGreet:"Hola Moe, tengo una pregunta ✨", nameLabel:"Tu nombre (opcional)", namePh:"Ej.: Anna"},
+  nl:{greet:"Hoi Moe, ik wil graag een afspraak aanvragen ✨", lService:"Behandeling", lPeriod:"Periode", lHair:"Mijn haar", lPhoto:"Foto", photoNote:"Ik stuur zo een foto 📷", qGreet:"Hoi Moe, ik heb een vraagje ✨", nameLabel:"Je naam (optioneel)", namePh:"bv. Anna"},
+  da:{greet:"سلام مو، بغيت ناخد موعد ✨", lService:"الخدمة", lPeriod:"الفترة", lHair:"شعري", lPhoto:"صورة", photoNote:"غادي نصيفط ليك تصويرة دابا 📷", qGreet:"سلام مو، عندي سؤال صغير ✨", nameLabel:"سميتك (اختياري)", namePh:"مثلا: أمينة"},
 };
 
-function buildWaLink(){
+function buildWaText(){
   const s = currentService();
   const w = WA[state.lang] || WA.en;
   const lines = [
@@ -1076,7 +1091,12 @@ function buildWaLink(){
   ];
   if(state.photoUrl) lines.push(`📷 ${w.lPhoto}: ${state.photoUrl}`);
   else if(state.photoData || s.photo) lines.push(w.photoNote);
-  return `https://wa.me/${MOE_WHATSAPP}?text=${encodeURIComponent(lines.join("\n"))}`;
+  if(state.name && state.name.trim()) lines.push(``, `– ${state.name.trim()}`);
+  return lines.join("\n");
+}
+
+function buildWaLink(){
+  return `https://wa.me/${MOE_WHATSAPP}?text=${encodeURIComponent(buildWaText())}`;
 }
 
 /* Bild clientseitig verkleinern (max. 1280 px), damit der Upload schnell bleibt */
@@ -1123,13 +1143,17 @@ function logToSheet(){
       body:JSON.stringify({
         timestamp: new Date().toISOString(),
         source: "yara_web",
+        source_token: "yara_web_v1",
         language_code: state.lang,
         selected_service: s.name.de,
         service_id: s.id,
         hair_info: state.hair,
         preferred_date: state.period,
         photo_url: state.photoUrl || "",
-        conversation_status: "MOE"
+        customer_name: (state.name||"").trim(),
+        customer_phone: "",
+        whatsapp_message: buildWaText(),
+        conversation_status: "REQUEST_SENT"
       })
     }).catch(()=>{});
   }catch(e){}
