@@ -353,6 +353,22 @@ textarea:focus, input:focus{outline:2px solid var(--copper);outline-offset:1px;b
   transform:scale(1.4);transform-origin:center 20%;
 }
 .menu-list{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.countdown{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:.82rem;font-weight:500;
+  padding:9px 16px;border-radius:999px;
+  width:fit-content;max-width:100%;margin:0 auto 4px;
+  letter-spacing:.01em;
+}
+.countdown.here{background:#eef5ec;color:#3f6b3a}
+.countdown.last{background:#f6e6dd;color:#a85a3f}
+.countdown.soon{background:var(--blush-deep);color:var(--plum-soft)}
+.cd-dot{
+  width:7px;height:7px;border-radius:50%;background:currentColor;flex:0 0 auto;
+  animation:cdPulse 2s ease-in-out infinite;
+}
+@keyframes cdPulse{0%,100%{opacity:.35;transform:scale(.85)}50%{opacity:1;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){ .cd-dot{animation:none;opacity:.8} }
 .nador-note{
   font-size:.78rem;line-height:1.5;
   color:var(--plum-soft);
@@ -469,6 +485,27 @@ textarea:focus, input:focus{outline:2px solid var(--copper);outline-offset:1px;b
   color:var(--plum-soft);
   text-align:center;
   padding:2px 6px;margin-top:2px;
+}
+
+/* ── Abschluss-Screen ─────────────────── */
+.done-wrap{text-align:center;padding-top:32px}
+.done-check{
+  width:88px;height:88px;margin:0 auto 18px;
+}
+.done-check svg{width:100%;height:100%;fill:none;stroke:var(--copper);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.done-check circle{
+  stroke-dasharray:151;stroke-dashoffset:151;
+  animation:drawCircle .55s ease forwards;
+}
+.done-check path{
+  stroke-dasharray:40;stroke-dashoffset:40;
+  animation:drawCheck .4s .45s ease forwards;
+}
+@keyframes drawCircle{to{stroke-dashoffset:0}}
+@keyframes drawCheck{to{stroke-dashoffset:0}}
+.done-reopen{font-size:.85rem}
+@media (prefers-reduced-motion:reduce){
+  .done-check circle,.done-check path{animation:none;stroke-dashoffset:0}
 }
 
 footer{
@@ -750,12 +787,12 @@ const ICONS = {
 
 /* ── Menü- & Zusatz-Texte (Preise / Frage) ── */
 const M = {
-  fr:{intro:"Coucou, je suis Yara", introSub:"Je suis l'assistante digitale de Moe. Je vous aide à préparer votre demande rapidement. Par quoi commençons-nous ?", book:"Rendez-vous", bookSub:"Lancez votre demande en 2 minutes", prices:"Tarifs", pricesSub:"Toutes les prestations et les prix", question:"Questions", questionSub:"Réponses rapides & contact avec Moe", priceTitle:"Nos tarifs", bookNow:"Prendre rendez-vous", nadorNote:"Cette app concerne uniquement les rendez-vous et les informations pour Nador. Pour un rendez-vous en Allemagne, contactez Moe comme d'habitude.", igBtn:"Moe sur Instagram", faqTitle:"Questions fréquentes", faqSub:"Touchez une question pour voir la réponse.", notListed:"Ma question n'y est pas", qTitle:"Votre question", qSub:"Écrivez librement – votre message part directement à Moe sur WhatsApp.", qPlaceholder:"Ex. : Faites-vous les mariées ? Êtes-vous ouverts le dimanche ?…", qSendMoe:"Envoyer la question à Moe", menuBack:"Retour au menu"},
-  de:{intro:"Hi, ich bin Yara", introSub:"Ich bin Moes digitale Assistentin. Ich helfe dir, deine Anfrage schnell vorzubereiten. Womit starten wir?", book:"Termin", bookSub:"In 2 Minuten deine Anfrage starten", prices:"Preise", pricesSub:"Alle Leistungen und Preise im Überblick", question:"Fragen", questionSub:"Schnelle Antworten & Kontakt zu Moe", priceTitle:"Unsere Preise", bookNow:"Termin anfragen", nadorNote:"Diese App ist nur für Termine und Infos in Nador. Für einen Termin in Deutschland melde dich wie gewohnt direkt bei Moe.", igBtn:"Moe auf Instagram", faqTitle:"Häufige Fragen", faqSub:"Tippe auf eine Frage, um die Antwort zu sehen.", notListed:"Meine Frage war nicht dabei", qTitle:"Deine Frage", qSub:"Schreib frei drauflos – deine Nachricht geht direkt an Moe auf WhatsApp.", qPlaceholder:"z. B. Macht ihr Braut-Styling? Habt ihr sonntags offen? …", qSendMoe:"Frage an Moe senden", menuBack:"Zurück zum Menü"},
-  en:{intro:"Hi, I'm Yara", introSub:"I'm Moe's digital assistant. I'll help you prepare your request quickly. Where shall we start?", book:"Booking", bookSub:"Start your request in 2 minutes", prices:"Prices", pricesSub:"All services and prices at a glance", question:"Questions", questionSub:"Quick answers & contact with Moe", priceTitle:"Our prices", bookNow:"Request appointment", nadorNote:"This app is only for appointments and info in Nador. For an appointment in Germany, contact Moe directly as usual.", igBtn:"Moe on Instagram", faqTitle:"Frequent questions", faqSub:"Tap a question to see the answer.", notListed:"My question isn't here", qTitle:"Your question", qSub:"Write freely – your message goes straight to Moe on WhatsApp.", qPlaceholder:"e.g. Do you do bridal styling? Are you open on Sundays? …", qSendMoe:"Send question to Moe", menuBack:"Back to menu"},
-  es:{intro:"¡Hola! Soy Yara", introSub:"Soy la asistente digital de Moe. Te ayudo a preparar tu solicitud rápidamente. ¿Por dónde empezamos?", book:"Cita", bookSub:"Inicia tu solicitud en 2 minutos", prices:"Precios", pricesSub:"Todos los servicios y precios", question:"Preguntas", questionSub:"Respuestas rápidas y contacto con Moe", priceTitle:"Nuestros precios", bookNow:"Solicitar cita", nadorNote:"Esta app es solo para citas e información en Nador. Para una cita en Alemania, contacta con Moe directamente como siempre.", igBtn:"Moe en Instagram", faqTitle:"Preguntas frecuentes", faqSub:"Toca una pregunta para ver la respuesta.", notListed:"Mi pregunta no está aquí", qTitle:"Tu pregunta", qSub:"Escribe con libertad – tu mensaje va directo a Moe por WhatsApp.", qPlaceholder:"Ej.: ¿Hacéis peinados de novia? ¿Abrís los domingos? …", qSendMoe:"Enviar pregunta a Moe", menuBack:"Volver al menú"},
-  nl:{intro:"Hoi, ik ben Yara", introSub:"Ik ben Moe's digitale assistent. Ik help je je aanvraag snel voor te bereiden. Waarmee beginnen we?", book:"Afspraak", bookSub:"Start je aanvraag in 2 minuten", prices:"Prijzen", pricesSub:"Alle behandelingen en prijzen op een rij", question:"Vragen", questionSub:"Snelle antwoorden & contact met Moe", priceTitle:"Onze prijzen", bookNow:"Afspraak aanvragen", nadorNote:"Deze app is alleen voor afspraken en info in Nador. Voor een afspraak in Duitsland neem je zoals gewoonlijk direct contact op met Moe.", igBtn:"Moe op Instagram", faqTitle:"Veelgestelde vragen", faqSub:"Tik op een vraag om het antwoord te zien.", notListed:"Mijn vraag staat er niet bij", qTitle:"Jouw vraag", qSub:"Schrijf vrijuit – je bericht gaat direct naar Moe op WhatsApp.", qPlaceholder:"bv. Doen jullie bruidskapsels? Zijn jullie zondag open? …", qSendMoe:"Vraag aan Moe sturen", menuBack:"Terug naar menu"},
-  da:{intro:"سلام، أنا يارا", introSub:"أنا المساعدة الرقمية ديال مو. كنعاونك تجهزي طلبك بسرعة. بشنو نبداو؟", book:"موعد", bookSub:"بدي طلبك ف2 دقايق", prices:"الأثمنة", pricesSub:"جميع الخدمات والأثمنة", question:"أسئلة", questionSub:"أجوبة سريعة والتواصل مع مو", priceTitle:"الأثمنة ديالنا", bookNow:"طلب موعد", nadorNote:"هاد التطبيق غير للمواعيد والمعلومات فالناظور. إلا بغيتي موعد فألمانيا، تواصلي مع مو مباشرة بحال العادة.", igBtn:"مو على إنستغرام", faqTitle:"أسئلة كثيرة", faqSub:"كليكي على سؤال باش تشوفي الجواب.", notListed:"سؤالي ما كانش هنا", qTitle:"السؤال ديالك", qSub:"كتبي بحرية – الرسالة ديالك غادية نيشان لمو فواتساب.", qPlaceholder:"مثلا: واش كديرو تسريحات العروسة؟ واش خدامين نهار الحد؟ …", qSendMoe:"صيفطي السؤال لمو", menuBack:"رجوع للقائمة"},
+  fr:{intro:"Coucou, je suis Yara", introSub:"Je suis l'assistante digitale de Moe. Je vous aide à préparer votre demande rapidement. Par quoi commençons-nous ?", book:"Rendez-vous", bookSub:"Lancez votre demande en 2 minutes", prices:"Tarifs", pricesSub:"Toutes les prestations et les prix", question:"Questions", questionSub:"Réponses rapides & contact avec Moe", priceTitle:"Nos tarifs", bookNow:"Prendre rendez-vous", nadorNote:"Cette app concerne uniquement les rendez-vous et les informations pour Nador. Pour un rendez-vous en Allemagne, contactez Moe comme d'habitude.", igBtn:"Moe sur Instagram", doneTitle:"Ta demande est en route ✨", doneSub:"Moe te répondra personnellement sur WhatsApp. À très vite !", doneReopen:"WhatsApp ne s'est pas ouvert ? Touche ici", doneNew:"Nouvelle demande", cdHere:(n)=>`Moe est encore ${n} ${n===1?"jour":"jours"} à Nador`, cdLast:"Dernier jour de Moe à Nador aujourd'hui", cdSoon:(n)=>`Moe sera à Nador dans ${n} ${n===1?"jour":"jours"}`, faqTitle:"Questions fréquentes", faqSub:"Touchez une question pour voir la réponse.", notListed:"Ma question n'y est pas", qTitle:"Votre question", qSub:"Écrivez librement – votre message part directement à Moe sur WhatsApp.", qPlaceholder:"Ex. : Faites-vous les mariées ? Êtes-vous ouverts le dimanche ?…", qSendMoe:"Envoyer la question à Moe", menuBack:"Retour au menu"},
+  de:{intro:"Hi, ich bin Yara", introSub:"Ich bin Moes digitale Assistentin. Ich helfe dir, deine Anfrage schnell vorzubereiten. Womit starten wir?", book:"Termin", bookSub:"In 2 Minuten deine Anfrage starten", prices:"Preise", pricesSub:"Alle Leistungen und Preise im Überblick", question:"Fragen", questionSub:"Schnelle Antworten & Kontakt zu Moe", priceTitle:"Unsere Preise", bookNow:"Termin anfragen", nadorNote:"Diese App ist nur für Termine und Infos in Nador. Für einen Termin in Deutschland melde dich wie gewohnt direkt bei Moe.", igBtn:"Moe auf Instagram", doneTitle:"Deine Anfrage ist unterwegs ✨", doneSub:"Moe meldet sich persönlich bei dir auf WhatsApp. Bis bald!", doneReopen:"WhatsApp hat sich nicht geöffnet? Hier tippen", doneNew:"Neue Anfrage", cdHere:(n)=>`Moe ist noch ${n} ${n===1?"Tag":"Tage"} in Nador`, cdLast:"Heute ist Moes letzter Tag in Nador", cdSoon:(n)=>`Moe ist in ${n} ${n===1?"Tag":"Tagen"} in Nador`, faqTitle:"Häufige Fragen", faqSub:"Tippe auf eine Frage, um die Antwort zu sehen.", notListed:"Meine Frage war nicht dabei", qTitle:"Deine Frage", qSub:"Schreib frei drauflos – deine Nachricht geht direkt an Moe auf WhatsApp.", qPlaceholder:"z. B. Macht ihr Braut-Styling? Habt ihr sonntags offen? …", qSendMoe:"Frage an Moe senden", menuBack:"Zurück zum Menü"},
+  en:{intro:"Hi, I'm Yara", introSub:"I'm Moe's digital assistant. I'll help you prepare your request quickly. Where shall we start?", book:"Booking", bookSub:"Start your request in 2 minutes", prices:"Prices", pricesSub:"All services and prices at a glance", question:"Questions", questionSub:"Quick answers & contact with Moe", priceTitle:"Our prices", bookNow:"Request appointment", nadorNote:"This app is only for appointments and info in Nador. For an appointment in Germany, contact Moe directly as usual.", igBtn:"Moe on Instagram", doneTitle:"Your request is on its way ✨", doneSub:"Moe will reply to you personally on WhatsApp. See you soon!", doneReopen:"WhatsApp didn't open? Tap here", doneNew:"New request", cdHere:(n)=>`Moe is in Nador for ${n} more ${n===1?"day":"days"}`, cdLast:"Today is Moe's last day in Nador", cdSoon:(n)=>`Moe is in Nador in ${n} ${n===1?"day":"days"}`, faqTitle:"Frequent questions", faqSub:"Tap a question to see the answer.", notListed:"My question isn't here", qTitle:"Your question", qSub:"Write freely – your message goes straight to Moe on WhatsApp.", qPlaceholder:"e.g. Do you do bridal styling? Are you open on Sundays? …", qSendMoe:"Send question to Moe", menuBack:"Back to menu"},
+  es:{intro:"¡Hola! Soy Yara", introSub:"Soy la asistente digital de Moe. Te ayudo a preparar tu solicitud rápidamente. ¿Por dónde empezamos?", book:"Cita", bookSub:"Inicia tu solicitud en 2 minutos", prices:"Precios", pricesSub:"Todos los servicios y precios", question:"Preguntas", questionSub:"Respuestas rápidas y contacto con Moe", priceTitle:"Nuestros precios", bookNow:"Solicitar cita", nadorNote:"Esta app es solo para citas e información en Nador. Para una cita en Alemania, contacta con Moe directamente como siempre.", igBtn:"Moe en Instagram", doneTitle:"Tu solicitud está en camino ✨", doneSub:"Moe te responderá personalmente por WhatsApp. ¡Hasta pronto!", doneReopen:"¿No se abrió WhatsApp? Toca aquí", doneNew:"Nueva solicitud", cdHere:(n)=>`Moe está ${n} ${n===1?"día":"días"} más en Nador`, cdLast:"Hoy es el último día de Moe en Nador", cdSoon:(n)=>`Moe estará en Nador en ${n} ${n===1?"día":"días"}`, faqTitle:"Preguntas frecuentes", faqSub:"Toca una pregunta para ver la respuesta.", notListed:"Mi pregunta no está aquí", qTitle:"Tu pregunta", qSub:"Escribe con libertad – tu mensaje va directo a Moe por WhatsApp.", qPlaceholder:"Ej.: ¿Hacéis peinados de novia? ¿Abrís los domingos? …", qSendMoe:"Enviar pregunta a Moe", menuBack:"Volver al menú"},
+  nl:{intro:"Hoi, ik ben Yara", introSub:"Ik ben Moe's digitale assistent. Ik help je je aanvraag snel voor te bereiden. Waarmee beginnen we?", book:"Afspraak", bookSub:"Start je aanvraag in 2 minuten", prices:"Prijzen", pricesSub:"Alle behandelingen en prijzen op een rij", question:"Vragen", questionSub:"Snelle antwoorden & contact met Moe", priceTitle:"Onze prijzen", bookNow:"Afspraak aanvragen", nadorNote:"Deze app is alleen voor afspraken en info in Nador. Voor een afspraak in Duitsland neem je zoals gewoonlijk direct contact op met Moe.", igBtn:"Moe op Instagram", doneTitle:"Je aanvraag is onderweg ✨", doneSub:"Moe reageert persoonlijk op je via WhatsApp. Tot snel!", doneReopen:"WhatsApp niet geopend? Tik hier", doneNew:"Nieuwe aanvraag", cdHere:(n)=>`Moe is nog ${n} ${n===1?"dag":"dagen"} in Nador`, cdLast:"Vandaag is Moe's laatste dag in Nador", cdSoon:(n)=>`Moe is over ${n} ${n===1?"dag":"dagen"} in Nador`, faqTitle:"Veelgestelde vragen", faqSub:"Tik op een vraag om het antwoord te zien.", notListed:"Mijn vraag staat er niet bij", qTitle:"Jouw vraag", qSub:"Schrijf vrijuit – je bericht gaat direct naar Moe op WhatsApp.", qPlaceholder:"bv. Doen jullie bruidskapsels? Zijn jullie zondag open? …", qSendMoe:"Vraag aan Moe sturen", menuBack:"Terug naar menu"},
+  da:{intro:"سلام، أنا يارا", introSub:"أنا المساعدة الرقمية ديال مو. كنعاونك تجهزي طلبك بسرعة. بشنو نبداو؟", book:"موعد", bookSub:"بدي طلبك ف2 دقايق", prices:"الأثمنة", pricesSub:"جميع الخدمات والأثمنة", question:"أسئلة", questionSub:"أجوبة سريعة والتواصل مع مو", priceTitle:"الأثمنة ديالنا", bookNow:"طلب موعد", nadorNote:"هاد التطبيق غير للمواعيد والمعلومات فالناظور. إلا بغيتي موعد فألمانيا، تواصلي مع مو مباشرة بحال العادة.", igBtn:"مو على إنستغرام", doneTitle:"الطلب ديالك فالطريق ✨", doneSub:"مو غادي يجاوبك شخصيا فواتساب. نشوفوك قريب!", doneReopen:"واتساب ماتحلش؟ كليكي هنا", doneNew:"طلب جديد", cdHere:(n)=>`مو باقي ${n} ${n===1?"نهار":"أيام"} فالناظور`, cdLast:"اليوم آخر نهار لمو فالناظور", cdSoon:(n)=>`مو غادي يكون فالناظور من بعد ${n} ${n===1?"نهار":"أيام"}`, faqTitle:"أسئلة كثيرة", faqSub:"كليكي على سؤال باش تشوفي الجواب.", notListed:"سؤالي ما كانش هنا", qTitle:"السؤال ديالك", qSub:"كتبي بحرية – الرسالة ديالك غادية نيشان لمو فواتساب.", qPlaceholder:"مثلا: واش كديرو تسريحات العروسة؟ واش خدامين نهار الحد؟ …", qSendMoe:"صيفطي السؤال لمو", menuBack:"رجوع للقائمة"},
 };
 
 /* Reihenfolge der Sprach-Kacheln */
@@ -790,7 +827,7 @@ const P = {
 };
 
 /* ── State ── */
-let state = {lang:null, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:""};
+let state = {lang:null, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:"", lastWaLink:null};
 let step = 0; // 0 Sprache · 1 Service · 2 Haar · 3 Zeitraum · 4 Zusammenfassung
 
 const app = document.getElementById("app");
@@ -801,7 +838,7 @@ function m(){ return M[state.lang] || M.en; }
 
 function render(){
   document.body.classList.toggle("rtl", state.lang && t().dir === "rtl");
-  const p = (typeof step === "number") ? step : 1;
+  const p = (step==="done") ? 6 : (typeof step === "number") ? step : 1;
   [...progress.children].forEach((d,i)=>d.classList.toggle("on", i<=p));
   app.innerHTML = "";
   if(step===0) renderLang();
@@ -811,6 +848,7 @@ function render(){
   else if(step===2) renderService();
   else if(step===3) renderHair();
   else if(step===4) renderPeriod();
+  else if(step==="done") renderDone();
   else renderSummary();
   window.scrollTo({top:0});
 }
@@ -854,6 +892,7 @@ function renderMenu(){
       <h2 class="step-title" style="margin-top:0">${ML.intro}</h2>
       <p class="step-sub" style="margin-bottom:6px">${ML.introSub}</p>
     </div>
+    ${(()=>{ const cd=countdownInfo(); return cd?`<div class="countdown ${cd.kind}"><span class="cd-dot"></span>${cd.text}</div>`:""; })()}
     <div class="menu-list">
       <button class="menu-btn" data-go="book">
         <span class="ico">${ICONS.book}</span>
@@ -1118,6 +1157,24 @@ function currentWindow(){
   return null;
 }
 
+/* Countdown-Text fürs Menü: Tage bis Fensterende bzw. bis Fensterbeginn.
+   Gibt {text, kind} zurück oder null, wenn keine Fenster hinterlegt sind. */
+function countdownInfo(){
+  const win = currentWindow();
+  if(!win) return null;
+  const ML = m();
+  const MS = 86400000;
+  const today = todayMidnight();
+  if(win.active){
+    const days = Math.round((parseISO(win.bis) - today)/MS);
+    if(days<=0) return {text:ML.cdLast, kind:"last"};
+    return {text:ML.cdHere(days), kind:"here"};
+  } else {
+    const days = Math.round((parseISO(win.von) - today)/MS);
+    return {text:ML.cdSoon(days), kind:"soon"};
+  }
+}
+
 function renderPeriod(){
   const L = t();
   const win = currentWindow();
@@ -1258,10 +1315,37 @@ function renderSummary(){
       busy = false;
     }
     logToSheet(); /* Logging parallel, blockiert das Senden nie */
-    window.open(buildWaLink(), "_blank");
+    const link = buildWaLink();
+    state.lastWaLink = link;
+    window.open(link, "_blank");
+    step = "done"; render();
   };
   el.querySelector("#restart").onclick = ()=>{
     state = {lang:state.lang, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:state.name};
+    step = 1; render();
+  };
+  app.appendChild(el);
+}
+
+/* ── Abschluss-Screen: elegante Bestätigung + Fallback + Neue Anfrage ── */
+function renderDone(){
+  const ML = m();
+  const el = document.createElement("section");
+  el.className = "step active";
+  el.innerHTML = `
+    <div class="done-wrap">
+      <div class="done-check" aria-hidden="true">
+        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M16 27l7 7 13-15"/></svg>
+      </div>
+      <h2 class="step-title" style="margin-top:4px">${ML.doneTitle}</h2>
+      <p class="step-sub">${ML.doneSub}</p>
+    </div>
+    <div class="actions" style="margin-top:26px">
+      ${state.lastWaLink?`<a class="btn btn-ghost done-reopen" href="${state.lastWaLink}" target="_blank" rel="noopener">${ML.doneReopen}</a>`:""}
+      <button class="btn btn-primary" id="again">${ML.doneNew}</button>
+    </div>`;
+  el.querySelector("#again").onclick = ()=>{
+    state = {lang:state.lang, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:state.name, lastWaLink:null};
     step = 1; render();
   };
   app.appendChild(el);
