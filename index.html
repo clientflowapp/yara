@@ -1017,6 +1017,8 @@ function renderService(){
       el.querySelectorAll(".svc").forEach(x=>x.classList.remove("selected"));
       b.classList.add("selected");
       el.querySelector("#next").disabled = false;
+      /* Nach kurzer Bestätigung automatisch weiter – kein Scrollen zum Button nötig */
+      setTimeout(()=>{ step=3; render(); }, 260);
     };
   });
   el.querySelector("#next").onclick = ()=>{ step=3; render(); };
