@@ -464,6 +464,13 @@ textarea:focus, input:focus{outline:2px solid var(--copper);outline-offset:1px;b
 @media (max-width:360px){ .date-row{flex-direction:column} }
 .live-chip{width:100%;padding:13px}
 
+.later-note{
+  font-size:.76rem;line-height:1.5;
+  color:var(--plum-soft);
+  text-align:center;
+  padding:2px 6px;margin-top:2px;
+}
+
 footer{
   text-align:center;
   font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
@@ -756,27 +763,27 @@ const LANG_ORDER = ["da","fr","de","en","es","nl"];
 
 /* ── Foto-Upload-Texte ── */
 const P = {
-  fr:{change:"Changer", uploading:"Envoi de la photo…", fail:"L'envoi de la photo a échoué – vous pourrez l'ajouter directement dans WhatsApp.", optional:"facultatif",
+  fr:{laterNote:"Pas de photo sous la main ? Aucun souci – tu peux aussi l'envoyer plus tard sur WhatsApp.", change:"Changer", uploading:"Envoi de la photo…", fail:"L'envoi de la photo a échoué – vous pourrez l'ajouter directement dans WhatsApp.", optional:"facultatif",
       curTitle:"Photo de vos cheveux actuels", curSub:"De face ou de dos – ça nous aide beaucoup.",
       wishTitle:"Résultat souhaité", wishSub:"Une inspiration, une photo qui vous plaît.",
       sumCur:"Cheveux actuels ✓", sumWish:"Inspiration ✓"},
-  de:{change:"Ändern", uploading:"Foto wird hochgeladen…", fail:"Foto-Upload hat nicht geklappt – du kannst es direkt in WhatsApp anhängen.", optional:"optional",
+  de:{laterNote:"Kein passendes Foto zur Hand? Kein Problem – du kannst es auch später in WhatsApp nachreichen.", change:"Ändern", uploading:"Foto wird hochgeladen…", fail:"Foto-Upload hat nicht geklappt – du kannst es direkt in WhatsApp anhängen.", optional:"optional",
       curTitle:"Foto von deinem Haar jetzt", curSub:"Vorn oder hinten – hilft uns sehr.",
       wishTitle:"Wunschergebnis", wishSub:"Eine Inspiration, ein Look der dir gefällt.",
       sumCur:"Aktuelles Haar ✓", sumWish:"Inspiration ✓"},
-  en:{change:"Change", uploading:"Uploading photo…", fail:"Photo upload failed – you can attach it directly in WhatsApp.", optional:"optional",
+  en:{laterNote:"No photo to hand? No problem – you can also send it later on WhatsApp.", change:"Change", uploading:"Uploading photo…", fail:"Photo upload failed – you can attach it directly in WhatsApp.", optional:"optional",
       curTitle:"Photo of your hair now", curSub:"Front or back – it helps us a lot.",
       wishTitle:"Desired result", wishSub:"An inspiration, a look you like.",
       sumCur:"Current hair ✓", sumWish:"Inspiration ✓"},
-  es:{change:"Cambiar", uploading:"Subiendo la foto…", fail:"No se pudo subir la foto – puedes adjuntarla directamente en WhatsApp.", optional:"opcional",
+  es:{laterNote:"¿No tienes una foto a mano? Sin problema – también puedes enviarla después por WhatsApp.", change:"Cambiar", uploading:"Subiendo la foto…", fail:"No se pudo subir la foto – puedes adjuntarla directamente en WhatsApp.", optional:"opcional",
       curTitle:"Foto de tu cabello ahora", curSub:"De frente o de espaldas – nos ayuda mucho.",
       wishTitle:"Resultado deseado", wishSub:"Una inspiración, un look que te guste.",
       sumCur:"Cabello actual ✓", sumWish:"Inspiración ✓"},
-  nl:{change:"Wijzigen", uploading:"Foto uploaden…", fail:"Uploaden mislukt – je kunt de foto direct in WhatsApp meesturen.", optional:"optioneel",
+  nl:{laterNote:"Geen foto bij de hand? Geen probleem – je kunt hem ook later in WhatsApp nasturen.", change:"Wijzigen", uploading:"Foto uploaden…", fail:"Uploaden mislukt – je kunt de foto direct in WhatsApp meesturen.", optional:"optioneel",
       curTitle:"Foto van je haar nu", curSub:"Voor- of achterkant – helpt ons enorm.",
       wishTitle:"Gewenst resultaat", wishSub:"Een inspiratie, een look die je mooi vindt.",
       sumCur:"Huidige haar ✓", sumWish:"Inspiratie ✓"},
-  da:{change:"بدّلي", uploading:"كنصيفطو التصويرة…", fail:"ما مشاتش التصويرة – تقدري تصيفطيها مباشرة فواتساب.", optional:"اختياري",
+  da:{laterNote:"ماعندكش تصويرة دابا؟ ماكاين مشكل – تقدري تصيفطيها من بعد فواتساب.", change:"بدّلي", uploading:"كنصيفطو التصويرة…", fail:"ما مشاتش التصويرة – تقدري تصيفطيها مباشرة فواتساب.", optional:"اختياري",
       curTitle:"تصويرة ديال شعرك دابا", curSub:"من قدام ولا من اللور – كتعاونا بزاف.",
       wishTitle:"النتيجة اللي بغيتي", wishSub:"شي إلهام، شي لوك عجبك.",
       sumCur:"الشعر ديالك دابا ✓", sumWish:"إلهام ✓"},
@@ -1031,6 +1038,7 @@ function renderHair(){
       <textarea id="hair" placeholder="${L.qPlaceholder}">${state.hair}</textarea>
       <div id="curArea"></div>
       <div id="wishArea"></div>
+      <p class="later-note">💬 ${(P[state.lang]||P.en).laterNote}</p>
     </div>
     <div class="actions">
       <button class="btn btn-primary" id="next" ${state.hair.trim()?"":"disabled"}>${L.next}</button>
