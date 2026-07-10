@@ -351,6 +351,26 @@ textarea:focus, input:focus{outline:2px solid var(--copper);outline-offset:1px;b
   transform:scale(1.4);transform-origin:center 20%;
 }
 .menu-list{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.nador-note{
+  font-size:.78rem;line-height:1.5;
+  color:var(--plum-soft);
+  background:var(--blush-deep);
+  border-radius:12px;
+  padding:11px 14px;
+  margin-top:16px;
+  text-align:center;
+}
+.btn-ig{
+  margin-top:10px;
+  background:transparent;
+  border:1px solid var(--blush-deep);
+  color:var(--plum-soft);
+  font-weight:500;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  text-decoration:none;
+}
+.btn-ig svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.6}
+@media (hover:hover){ .btn-ig:hover{border-color:var(--copper);color:var(--copper)} }
 .menu-btn{
   background:var(--white);
   border:1px solid var(--blush-deep);
@@ -416,6 +436,30 @@ textarea:focus, input:focus{outline:2px solid var(--copper);outline-offset:1px;b
 }
 .faq-item.open .faq-a{max-height:260px;padding:0 16px 15px}
 
+/* ── Datumsfelder & Verfügbarkeit ─────── */
+.avail-info{
+  font-size:.85rem;line-height:1.5;
+  border-radius:12px;padding:11px 14px;margin-bottom:16px;
+  text-align:center;
+}
+.avail-info.here{background:#eef5ec;color:#3f6b3a}
+.avail-info.soon{background:var(--blush-deep);color:var(--plum-soft)}
+.avail-info.away{background:#fbeaea;color:#a33}
+.date-row{display:flex;gap:10px}
+.date-field{flex:1;display:flex;flex-direction:column;gap:5px}
+.date-field span{
+  font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne);
+  padding-inline-start:2px;
+}
+.date-field input[type=date]{
+  width:100%;background:var(--white);
+  border:1px solid var(--blush-deep);border-radius:var(--radius);
+  padding:14px 14px;font-family:var(--font-body);font-size:1rem;
+  color:var(--plum-ink);
+}
+.date-field input[type=date]:focus{outline:2px solid var(--copper);outline-offset:1px;border-color:transparent}
+.live-chip{width:100%;padding:13px}
+
 footer{
   text-align:center;
   font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
@@ -464,6 +508,13 @@ const MAKE_WEBHOOK = "https://hook.eu2.make.com/zlih2n9h5i0yky2xzpgfkmdotctt6rvm
 const MOE_LOGO   = "logo.svg";
 const YARA_AVATAR = "https://images.squarespace-cdn.com/content/v1/693eabc3d625ea5b123d8225/bab0334a-4b94-4806-bcec-7fc003ebfe4f/yara_profilbild.png?format=300w";
 
+/* Moes Anwesenheiten liegen in verfuegbarkeit.json (im selben Ordner).
+   Diese Liste wird beim Start geladen; hier nur ein Fallback, falls die Datei fehlt/fehlerhaft ist. */
+let AVAIL = [];
+
+/* Moes Instagram – für Deutschland-Anfragen ("wie gewohnt") */
+const MOE_INSTAGRAM = "https://instagram.com/moelamkaddam";
+
 /* ── Leistungen (aus dem Leistungen-Tab, Private Room bewusst nicht dabei) ── */
 const SERVICES = [
   {id:"wash_blowdry", name:{de:"Waschen & Föhnen", fr:"Shampoing & Brushing", en:"Wash & Blowdry", es:"Lavado & Secado", nl:"Wassen & Föhnen", da:"غسيل و سيشوار"}, pS:250, pL:350, dur:{de:"ca. 30 Min", fr:"env. 30 min", en:"approx. 30 min", es:"aprox. 30 min", nl:"ca. 30 min", da:"تقريبا 30 دقيقة"}, q:"hairlen", photo:false},
@@ -493,34 +544,62 @@ const FLAGS = {
 
 /* ── FAQ (Antworten direkt geteilt; bitte mit Moe abstimmen, v. a. Bezahlung & Braut-Styling) ── */
 const FAQ = [
-  {q:{de:"Wie bekomme ich einen Termin?", fr:"Comment prendre rendez-vous ?", en:"How do I get an appointment?", es:"¿Cómo consigo una cita?", nl:"Hoe krijg ik een afspraak?", da:"كيفاش ناخد موعد؟"},
-   a:{de:"Wir arbeiten nur mit Termin. Starte deine Anfrage einfach hier über „Termin“ – Moe bestätigt dir Datum und Uhrzeit persönlich.",
-      fr:"Nous travaillons uniquement sur rendez-vous. Lancez votre demande via « Rendez-vous » – Moe vous confirme la date et l'heure personnellement.",
-      en:"We work by appointment only. Just start your request via \"Booking\" – Moe confirms the date and time personally.",
-      es:"Trabajamos solo con cita. Inicia tu solicitud en \"Cita\" – Moe te confirma la fecha y la hora personalmente.",
-      nl:"We werken alleen op afspraak. Start je aanvraag via \"Afspraak\" – Moe bevestigt datum en tijd persoonlijk.",
-      da:"كنخدمو غير بالموعد. بدي طلبك من „موعد“ – مو غادي يأكد ليك النهار والوقت شخصيا."}},
-  {q:{de:"Wo ist der Salon?", fr:"Où se trouve le salon ?", en:"Where is the salon?", es:"¿Dónde está el salón?", nl:"Waar is de salon?", da:"فين كاين الصالون؟"},
-   a:{de:"Der Salon ist in Nador. Die genaue Adresse und Wegbeschreibung bekommst du von Moe mit der Terminbestätigung.",
-      fr:"Le salon est à Nador. L'adresse exacte et l'itinéraire vous seront communiqués par Moe avec la confirmation.",
-      en:"The salon is in Nador. You'll receive the exact address and directions from Moe with your confirmation.",
-      es:"El salón está en Nador. Recibirás la dirección exacta y cómo llegar de Moe con la confirmación.",
-      nl:"De salon is in Nador. Het exacte adres en de route krijg je van Moe bij de bevestiging.",
-      da:"الصالون فالناظور. العنوان بالضبط والطريق غادي يوصلك من عند مو مع تأكيد الموعد."}},
+  {q:{de:"Kannst du einschätzen, ob meine Haare blondiert werden können?", fr:"Peux-tu estimer si mes cheveux peuvent être décolorés ?", en:"Can you tell whether my hair can be bleached?", es:"¿Puedes estimar si mi cabello se puede decolorar?", nl:"Kun je inschatten of mijn haar geblondeerd kan worden?", da:"واش تقدر تعرف واش شعري يمكن يتبلوندا؟"},
+   a:{de:"Eine sichere Einschätzung ist erst möglich, wenn Moe dein Haar persönlich gesehen hat. Besonders bei bereits gefärbtem, dunklem oder vorbehandeltem Haar kann man aus der Ferne nicht zuverlässig sagen, was möglich ist. Moe arbeitet nur, wenn das Ergebnis realistisch ist und dein Haar nicht unnötig geschädigt wird.",
+      fr:"Une estimation fiable n'est possible qu'après que Moe ait vu tes cheveux en personne. Surtout sur des cheveux déjà colorés, foncés ou traités, il est impossible de dire à distance ce qui est réalisable. Moe ne travaille que si le résultat est réaliste et si tes cheveux ne sont pas abîmés inutilement.",
+      en:"A reliable assessment is only possible once Moe has seen your hair in person. Especially with already coloured, dark or pre-treated hair, it's impossible to say from a distance what can be achieved. Moe only works when the result is realistic and your hair won't be damaged unnecessarily.",
+      es:"Una valoración fiable solo es posible cuando Moe ha visto tu cabello en persona. Sobre todo en cabello ya teñido, oscuro o tratado, no se puede decir a distancia qué es posible. Moe solo trabaja cuando el resultado es realista y tu cabello no se daña innecesariamente.",
+      nl:"Een betrouwbare inschatting is pas mogelijk als Moe je haar persoonlijk heeft gezien. Zeker bij al gekleurd, donker of voorbehandeld haar kun je op afstand niet betrouwbaar zeggen wat mogelijk is. Moe werkt alleen als het resultaat realistisch is en je haar niet onnodig beschadigd wordt.",
+      da:"تقييم أكيد ممكن غير من بعد ما مو يشوف شعرك شخصيا. خصوصا فالشعر اللي مصبوغ ولا غامق ولا معالج من قبل، ماكيمكنش نعرفو من بعيد شنو ممكن. مو كيخدم غير إلا كانت النتيجة واقعية وشعرك ما غاديش يتضرر بلا فايدة."}},
+  {q:{de:"Ich habe dunkel oder schwarz gefärbtes Haar. Kann ich weißblond werden?", fr:"J'ai les cheveux teints foncé ou noir. Puis-je devenir blond platine ?", en:"My hair is dyed dark or black. Can I go platinum blonde?", es:"Tengo el cabello teñido oscuro o negro. ¿Puedo quedar rubio platino?", nl:"Mijn haar is donker of zwart geverfd. Kan ik platinablond worden?", da:"شعري مصبوغ غامق ولا كحل. واش نقدر نولي بلوند بيان بزاف؟"},
+   a:{de:"Bei sehr dunkel oder schwarz gefärbtem Haar ist ein sehr helles Blond oft nicht in einem Termin möglich und kann das Haar stark belasten. Moe entscheidet erst nach Sichtung deines Haars, ob und wie eine Aufhellung verantwortbar ist. Wenn das Risiko für Haarbruch zu hoch ist, wird die Behandlung nicht durchgeführt.",
+      fr:"Sur des cheveux teints très foncé ou noir, un blond très clair n'est souvent pas possible en une seule séance et peut fortement fragiliser les cheveux. Moe décide seulement après avoir vu tes cheveux si et comment un éclaircissement est raisonnable. Si le risque de casse est trop élevé, le soin n'est pas réalisé.",
+      en:"With very dark or black dyed hair, a very light blonde is often not possible in one appointment and can put a lot of stress on the hair. Moe only decides after seeing your hair whether and how lightening is responsible. If the risk of breakage is too high, the treatment won't be carried out.",
+      es:"Con cabello teñido muy oscuro o negro, un rubio muy claro a menudo no es posible en una sola cita y puede dañar mucho el cabello. Moe decide solo tras ver tu cabello si un aclarado es responsable y cómo. Si el riesgo de rotura es demasiado alto, el tratamiento no se realiza.",
+      nl:"Bij zeer donker of zwart geverfd haar is een heel licht blond vaak niet in één afspraak mogelijk en kan het haar zwaar belasten. Moe beslist pas na het zien van je haar of en hoe blonderen verantwoord is. Als het risico op haarbreuk te groot is, wordt de behandeling niet uitgevoerd.",
+      da:"فالشعر المصبوغ غامق بزاف ولا كحل، البلوند البيان بزاف بزاف ماكيمكنش فموعد وحد وقادر يضر الشعر بزاف. مو كيقرر غير من بعد ما يشوف شعرك واش وكيفاش التفتيح معقول. إلا كان خطر تكسر الشعر عالي بزاف، ماكيديرش المعالجة."}},
+  {q:{de:"Warum bekomme ich keinen genauen Preis vorab?", fr:"Pourquoi n'ai-je pas de prix exact à l'avance ?", en:"Why don't I get an exact price in advance?", es:"¿Por qué no recibo un precio exacto por adelantado?", nl:"Waarom krijg ik vooraf geen exacte prijs?", da:"علاش ماكنأخدش الثمن بالضبط من قبل؟"},
+   a:{de:"Die Preise sind Richtwerte. Der genaue Preis hängt von Haarlänge, Haardichte, Ausgangsfarbe, Haarzustand und gewünschtem Ergebnis ab. Deshalb kann Moe den finalen Preis erst vor Ort nennen, nachdem er dein Haar gesehen hat.",
+      fr:"Les prix sont indicatifs. Le prix exact dépend de la longueur, de la densité, de la couleur de départ, de l'état des cheveux et du résultat souhaité. C'est pourquoi Moe ne peut donner le prix final que sur place, après avoir vu tes cheveux.",
+      en:"Prices are a guide. The exact price depends on hair length, thickness, starting colour, hair condition and the desired result. That's why Moe can only give the final price on site, after seeing your hair.",
+      es:"Los precios son orientativos. El precio exacto depende del largo, la densidad, el color de partida, el estado del cabello y el resultado deseado. Por eso Moe solo puede dar el precio final en el salón, tras ver tu cabello.",
+      nl:"De prijzen zijn richtprijzen. De exacte prijs hangt af van haarlengte, haardikte, uitgangskleur, haarconditie en het gewenste resultaat. Daarom kan Moe de definitieve prijs pas ter plaatse noemen, nadat hij je haar heeft gezien.",
+      da:"الأثمنة تقريبية. الثمن بالضبط كيعتمد على طول الشعر، كثافتو، اللون الأصلي، حالة الشعر والنتيجة اللي بغيتي. لهاد السبب مو كيقدر يعطيك الثمن النهائي غير فالصالون، من بعد ما يشوف شعرك."}},
+  {q:{de:"Arbeitet Moe mit Olaplex?", fr:"Moe travaille-t-il avec Olaplex ?", en:"Does Moe work with Olaplex?", es:"¿Moe trabaja con Olaplex?", nl:"Werkt Moe met Olaplex?", da:"واش مو كيخدم بأولابلكس (Olaplex)؟"},
+   a:{de:"Ja, Moe arbeitet bei passenden Behandlungen mit Olaplex. Ob und wie Olaplex eingesetzt wird, hängt von deinem Haarzustand und der gewünschten Leistung ab.",
+      fr:"Oui, Moe utilise Olaplex pour les soins adaptés. Si et comment Olaplex est utilisé dépend de l'état de tes cheveux et de la prestation souhaitée.",
+      en:"Yes, Moe uses Olaplex for suitable treatments. Whether and how Olaplex is used depends on your hair condition and the desired service.",
+      es:"Sí, Moe utiliza Olaplex en los tratamientos adecuados. Si se usa Olaplex y cómo depende del estado de tu cabello y del servicio deseado.",
+      nl:"Ja, Moe gebruikt Olaplex bij passende behandelingen. Of en hoe Olaplex wordt ingezet, hangt af van je haarconditie en de gewenste behandeling.",
+      da:"أه، مو كيستعمل أولابلكس فالمعالجات المناسبة. واش وكيفاش كيتستعمل أولابلكس كيعتمد على حالة شعرك والخدمة اللي بغيتي."}},
+  {q:{de:"Wie soll ich meine Haare vorbereiten?", fr:"Comment dois-je préparer mes cheveux ?", en:"How should I prepare my hair?", es:"¿Cómo debo preparar mi cabello?", nl:"Hoe moet ik mijn haar voorbereiden?", da:"كيفاش خاصني نوجد شعري؟"},
+   a:{de:"Komm bitte mit frisch gewaschenem, trockenem Haar zum Termin. Bitte nicht mit stark fettigen Haaren kommen, damit Moe dein Haar besser beurteilen und sauber arbeiten kann.",
+      fr:"Viens au rendez-vous avec des cheveux propres et secs. Merci de ne pas venir avec des cheveux très gras, pour que Moe puisse mieux évaluer tes cheveux et travailler proprement.",
+      en:"Please come to your appointment with freshly washed, dry hair. Please don't come with very greasy hair, so Moe can assess your hair better and work cleanly.",
+      es:"Ven a la cita con el cabello recién lavado y seco. Por favor, no vengas con el cabello muy graso, para que Moe pueda evaluar mejor tu cabello y trabajar con limpieza.",
+      nl:"Kom met vers gewassen, droog haar naar je afspraak. Kom alsjeblieft niet met heel vet haar, zodat Moe je haar beter kan beoordelen en netjes kan werken.",
+      da:"عافاك جي للموعد بشعر مغسول ونقي وناشف. عافاك ما تجيش بشعر مدهون بزاف، باش مو يقدر يقيّم شعرك مزيان ويخدم بنقاوة."}},
   {q:{de:"Wie kann ich bezahlen?", fr:"Comment puis-je payer ?", en:"How can I pay?", es:"¿Cómo puedo pagar?", nl:"Hoe kan ik betalen?", da:"كيفاش نقدر نخلص؟"},
-   a:{de:"Bezahlung ist vor Ort möglich. [Bitte mit Moe abstimmen: Bar / Karte.]",
-      fr:"Le paiement se fait sur place. [À confirmer avec Moe : espèces / carte.]",
-      en:"Payment is on site. [Please confirm with Moe: cash / card.]",
-      es:"El pago es en el salón. [Confirmar con Moe: efectivo / tarjeta.]",
-      nl:"Betalen kan ter plaatse. [Even afstemmen met Moe: contant / kaart.]",
-      da:"الخلاص كيتم فالصالون. [خاص تأكيد مع مو: كاش / كارط.]"}},
-  {q:{de:"Macht ihr Braut- & Event-Styling?", fr:"Faites-vous la coiffure mariée & événements ?", en:"Do you do bridal & event styling?", es:"¿Hacéis peinados de novia y eventos?", nl:"Doen jullie bruids- & event-styling?", da:"واش كديرو تسريحات العروسة والمناسبات؟"},
-   a:{de:"Ja, sehr gern. Schreib uns unten über „Frage an Moe“ mit Datum und Anlass – Moe meldet sich direkt bei dir.",
-      fr:"Oui, avec plaisir. Écrivez-nous ci-dessous via « Question à Moe » avec la date et l'occasion – Moe vous répondra directement.",
-      en:"Yes, gladly. Write to us below via \"Question to Moe\" with the date and occasion – Moe will get back to you directly.",
-      es:"Sí, con gusto. Escríbenos abajo en \"Pregunta a Moe\" con la fecha y la ocasión – Moe te responderá directamente.",
-      nl:"Ja, heel graag. Schrijf ons hieronder via \"Vraag aan Moe\" met datum en gelegenheid – Moe reageert direct.",
-      da:"أه، بكل فرح. كتبي لينا لتحت من „سؤال لمو“ مع النهار والمناسبة – مو غادي يتواصل معاك نيشان."}},
+   a:{de:"Die Zahlung ist aktuell nur in bar möglich.",
+      fr:"Le paiement se fait actuellement uniquement en espèces.",
+      en:"Payment is currently only possible in cash.",
+      es:"Actualmente el pago solo es posible en efectivo.",
+      nl:"Betalen kan momenteel alleen contant.",
+      da:"الخلاص دابا كيتم غير بالكاش."}},
+  {q:{de:"Darf ich eine Begleitperson mitbringen?", fr:"Puis-je venir accompagnée ?", en:"Can I bring someone with me?", es:"¿Puedo llevar acompañante?", nl:"Mag ik iemand meenemen?", da:"واش نقدر نجيب معايا شي حد؟"},
+   a:{de:"Da Moe in einem privaten Salon arbeitet und jedem Termin volle Ruhe und Aufmerksamkeit geben möchte, sind Begleitpersonen leider nicht möglich. Bitte komm alleine zu deinem Termin.",
+      fr:"Comme Moe travaille dans un salon privé et souhaite offrir calme et attention à chaque rendez-vous, les accompagnants ne sont malheureusement pas possibles. Merci de venir seule à ton rendez-vous.",
+      en:"As Moe works in a private salon and wants to give every appointment full calm and attention, companions are unfortunately not possible. Please come to your appointment alone.",
+      es:"Como Moe trabaja en un salón privado y quiere dar a cada cita toda la calma y atención, lamentablemente no se permiten acompañantes. Por favor, ven sola a tu cita.",
+      nl:"Omdat Moe in een privésalon werkt en elke afspraak volledige rust en aandacht wil geven, zijn begeleiders helaas niet mogelijk. Kom alsjeblieft alleen naar je afspraak.",
+      da:"حيت مو كيخدم فصالون خاص وبغى يعطي لكل موعد الهدوء والاهتمام الكامل، للأسف ماكيمكنش تجي مع شي حد. عافاك جي وحدك للموعد ديالك."}},
+  {q:{de:"Wie läuft die Terminvereinbarung ab?", fr:"Comment se passe la prise de rendez-vous ?", en:"How does booking work?", es:"¿Cómo funciona la reserva?", nl:"Hoe verloopt het maken van een afspraak?", da:"كيفاش كيتم أخذ الموعد؟"},
+   a:{de:"Du stellst deine Anfrage über die App. Moe prüft deine Angaben und meldet sich persönlich bei dir auf WhatsApp, um den Termin abzustimmen. Drei Tage vor deinem Termin erhältst du eine Erinnerung. Die Adresse bekommst du erst mit dieser Erinnerung, da der Salon privat ist und die Adresse nicht öffentlich geteilt wird.",
+      fr:"Tu fais ta demande via l'app. Moe vérifie tes informations et te contacte personnellement sur WhatsApp pour convenir du rendez-vous. Trois jours avant ton rendez-vous, tu reçois un rappel. Tu reçois l'adresse seulement avec ce rappel, car le salon est privé et l'adresse n'est pas partagée publiquement.",
+      en:"You send your request via the app. Moe checks your details and contacts you personally on WhatsApp to arrange the appointment. Three days before your appointment you'll receive a reminder. You'll get the address only with this reminder, as the salon is private and the address isn't shared publicly.",
+      es:"Haces tu solicitud a través de la app. Moe revisa tus datos y te contacta personalmente por WhatsApp para concretar la cita. Tres días antes de tu cita recibirás un recordatorio. La dirección la recibirás solo con ese recordatorio, ya que el salón es privado y la dirección no se comparte públicamente.",
+      nl:"Je doet je aanvraag via de app. Moe controleert je gegevens en neemt persoonlijk contact met je op via WhatsApp om de afspraak af te stemmen. Drie dagen voor je afspraak ontvang je een herinnering. Het adres krijg je pas met deze herinnering, omdat de salon privé is en het adres niet openbaar wordt gedeeld.",
+      da:"كدير الطلب ديالك عبر التطبيق. مو كيراجع المعلومات ديالك وكيتواصل معاك شخصيا فواتساب باش يتافقو على الموعد. ثلاث أيام قبل الموعد ديالك غادي توصلك تذكير. العنوان غادي توصلك غير مع هاد التذكير، حيت الصالون خاص والعنوان ماكيتشاركش بشكل عام."}},
 ];
 
 /* ── Sechs Sprachen (Texte analog zum Fixtexte-Tab; Darija bitte von Moe prüfen lassen) ── */
@@ -539,6 +618,7 @@ const T = {
     perSub:"Beaucoup de nos clientes sont de passage – dites-nous votre période.",
     perPlaceholder:"Ex. : du 15 au 25 août, plutôt le matin…",
     chips:["Cette semaine","Semaine prochaine","Je vis à Nador"],
+    perFrom:"Arrivée", perTo:"Départ", perLive:"Je vis à Nador", perHere:(a,b)=>`Moe est à Nador jusqu'au ${b} ✨`, perSoon:(a,b)=>`Moe sera de nouveau à Nador du ${a} au ${b}`, perAway:"Pour l'instant, aucune date d'ouverture n'est prévue – écrivez-nous, nous vous tiendrons au courant.", perOutside:(a,b)=>`Sur cette période, Moe n'est pas à Nador. Il y est du ${a} au ${b}.`, perPick:"Indiquez votre période sur place",
     sumTitle:"Votre demande", sumSvc:"Prestation", sumHair:"Vos cheveux", sumPer:"Période", sumPhoto:"Photo à envoyer dans WhatsApp 📷",
     waNote:"WhatsApp s'ouvre avec votre demande – Moe vous répond personnellement.",
     next:"Continuer", back:"Retour", send:"Envoyer la demande", restart:"Recommencer",
@@ -557,6 +637,7 @@ const T = {
     perSub:"Viele unserer Kundinnen sind zu Besuch – nenn uns deinen Zeitraum.",
     perPlaceholder:"z. B. 15.–25. August, am liebsten vormittags …",
     chips:["Diese Woche","Nächste Woche","Ich wohne in Nador"],
+    perFrom:"Ankunft", perTo:"Abreise", perLive:"Ich wohne in Nador", perHere:(a,b)=>`Moe ist bis ${b} in Nador ✨`, perSoon:(a,b)=>`Moe ist vom ${a} bis ${b} wieder in Nador`, perAway:"Aktuell ist kein Zeitraum hinterlegt – schreib uns, wir melden uns bei dir.", perOutside:(a,b)=>`In diesem Zeitraum ist Moe leider nicht in Nador. Er ist vom ${a} bis ${b} da.`, perPick:"Nenn uns deinen Aufenthalt vor Ort",
     sumTitle:"Deine Anfrage", sumSvc:"Leistung", sumHair:"Dein Haar", sumPer:"Zeitraum", sumPhoto:"Foto folgt in WhatsApp 📷",
     waNote:"WhatsApp öffnet sich mit deiner Anfrage – Moe antwortet dir persönlich.",
     next:"Weiter", back:"Zurück", send:"Anfrage senden", restart:"Von vorn beginnen",
@@ -575,6 +656,7 @@ const T = {
     perSub:"Many of our clients are visiting – let us know your dates.",
     perPlaceholder:"e.g. 15–25 August, mornings preferred …",
     chips:["This week","Next week","I live in Nador"],
+    perFrom:"Arrival", perTo:"Departure", perLive:"I live in Nador", perHere:(a,b)=>`Moe is in Nador until ${b} ✨`, perSoon:(a,b)=>`Moe will be back in Nador from ${a} to ${b}`, perAway:"No dates are set right now – write to us and we'll keep you posted.", perOutside:(a,b)=>`Moe isn't in Nador during this period. He's here from ${a} to ${b}.`, perPick:"Tell us your dates in town",
     sumTitle:"Your request", sumSvc:"Service", sumHair:"Your hair", sumPer:"Period", sumPhoto:"Photo to follow in WhatsApp 📷",
     waNote:"WhatsApp opens with your request – Moe will reply personally.",
     next:"Continue", back:"Back", send:"Send request", restart:"Start over",
@@ -593,6 +675,7 @@ const T = {
     perSub:"Muchas de nuestras clientas están de visita – dinos tus fechas.",
     perPlaceholder:"Ej.: del 15 al 25 de agosto, mejor por la mañana …",
     chips:["Esta semana","Próxima semana","Vivo en Nador"],
+    perFrom:"Llegada", perTo:"Salida", perLive:"Vivo en Nador", perHere:(a,b)=>`Moe está en Nador hasta el ${b} ✨`, perSoon:(a,b)=>`Moe estará de nuevo en Nador del ${a} al ${b}`, perAway:"Por ahora no hay fechas fijadas – escríbenos y te avisamos.", perOutside:(a,b)=>`En estas fechas Moe no está en Nador. Está del ${a} al ${b}.`, perPick:"Indícanos tus fechas en la ciudad",
     sumTitle:"Tu solicitud", sumSvc:"Servicio", sumHair:"Tu cabello", sumPer:"Período", sumPhoto:"Foto por enviar en WhatsApp 📷",
     waNote:"Se abre WhatsApp con tu solicitud – Moe te responde personalmente.",
     next:"Continuar", back:"Atrás", send:"Enviar solicitud", restart:"Empezar de nuevo",
@@ -611,6 +694,7 @@ const T = {
     perSub:"Veel van onze klanten zijn op bezoek – laat ons je periode weten.",
     perPlaceholder:"bv. 15–25 augustus, liefst 's ochtends …",
     chips:["Deze week","Volgende week","Ik woon in Nador"],
+    perFrom:"Aankomst", perTo:"Vertrek", perLive:"Ik woon in Nador", perHere:(a,b)=>`Moe is tot ${b} in Nador ✨`, perSoon:(a,b)=>`Moe is van ${a} tot ${b} weer in Nador`, perAway:"Er zijn nu geen data ingesteld – schrijf ons, we houden je op de hoogte.", perOutside:(a,b)=>`In deze periode is Moe niet in Nador. Hij is er van ${a} tot ${b}.`, perPick:"Geef je periode ter plaatse door",
     sumTitle:"Jouw aanvraag", sumSvc:"Behandeling", sumHair:"Je haar", sumPer:"Periode", sumPhoto:"Foto volgt in WhatsApp 📷",
     waNote:"WhatsApp opent met je aanvraag – Moe antwoordt je persoonlijk.",
     next:"Verder", back:"Terug", send:"Aanvraag versturen", restart:"Opnieuw beginnen",
@@ -629,6 +713,7 @@ const T = {
     perSub:"بزاف من الكليان ديالنا جايين فزيارة – قولي لينا الفترة ديالك.",
     perPlaceholder:"مثلا: من 15 ل 25 غشت، الصباح أحسن …",
     chips:["هاد السيمانة","السيمانة الجاية","ساكنة فالناظور"],
+    perFrom:"الوصول", perTo:"المغادرة", perLive:"ساكنة فالناظور", perHere:(a,b)=>`مو فالناظور حتى ل ${b} ✨`, perSoon:(a,b)=>`مو غادي يكون فالناظور من ${a} حتى ${b}`, perAway:"دابا ماكايناش شي تواريخ – كتبي لينا وغادي نخبروك.", perOutside:(a,b)=>`فهاد الفترة مو ماشي فالناظور. كيكون من ${a} حتى ${b}.`, perPick:"قولي لينا الفترة ديالك فالمدينة",
     sumTitle:"الطلب ديالك", sumSvc:"الخدمة", sumHair:"الشعر ديالك", sumPer:"الفترة", sumPhoto:"التصويرة غادي تجي فواتساب 📷",
     waNote:"غادي يتحل واتساب بالطلب ديالك – مو غادي يجاوبك شخصيا.",
     next:"كمّل", back:"رجع", send:"صيفط الطلب", restart:"عاود من الأول",
@@ -654,12 +739,12 @@ const ICONS = {
 
 /* ── Menü- & Zusatz-Texte (Preise / Frage) ── */
 const M = {
-  fr:{intro:"Coucou, je suis Yara", introSub:"Je suis l'assistante digitale de Moe. Je vous aide à préparer votre demande rapidement. Par quoi commençons-nous ?", book:"Rendez-vous", bookSub:"Lancez votre demande en 2 minutes", prices:"Tarifs", pricesSub:"Toutes les prestations et les prix", question:"Questions", questionSub:"Réponses rapides & contact avec Moe", priceTitle:"Nos tarifs", bookNow:"Prendre rendez-vous", faqTitle:"Questions fréquentes", faqSub:"Touchez une question pour voir la réponse.", notListed:"Ma question n'y est pas", qTitle:"Votre question", qSub:"Écrivez librement – votre message part directement à Moe sur WhatsApp.", qPlaceholder:"Ex. : Faites-vous les mariées ? Êtes-vous ouverts le dimanche ?…", qSendMoe:"Envoyer la question à Moe", menuBack:"Retour au menu"},
-  de:{intro:"Hi, ich bin Yara", introSub:"Ich bin Moes digitale Assistentin. Ich helfe dir, deine Anfrage schnell vorzubereiten. Womit starten wir?", book:"Termin", bookSub:"In 2 Minuten deine Anfrage starten", prices:"Preise", pricesSub:"Alle Leistungen und Preise im Überblick", question:"Fragen", questionSub:"Schnelle Antworten & Kontakt zu Moe", priceTitle:"Unsere Preise", bookNow:"Termin anfragen", faqTitle:"Häufige Fragen", faqSub:"Tippe auf eine Frage, um die Antwort zu sehen.", notListed:"Meine Frage war nicht dabei", qTitle:"Deine Frage", qSub:"Schreib frei drauflos – deine Nachricht geht direkt an Moe auf WhatsApp.", qPlaceholder:"z. B. Macht ihr Braut-Styling? Habt ihr sonntags offen? …", qSendMoe:"Frage an Moe senden", menuBack:"Zurück zum Menü"},
-  en:{intro:"Hi, I'm Yara", introSub:"I'm Moe's digital assistant. I'll help you prepare your request quickly. Where shall we start?", book:"Booking", bookSub:"Start your request in 2 minutes", prices:"Prices", pricesSub:"All services and prices at a glance", question:"Questions", questionSub:"Quick answers & contact with Moe", priceTitle:"Our prices", bookNow:"Request appointment", faqTitle:"Frequent questions", faqSub:"Tap a question to see the answer.", notListed:"My question isn't here", qTitle:"Your question", qSub:"Write freely – your message goes straight to Moe on WhatsApp.", qPlaceholder:"e.g. Do you do bridal styling? Are you open on Sundays? …", qSendMoe:"Send question to Moe", menuBack:"Back to menu"},
-  es:{intro:"¡Hola! Soy Yara", introSub:"Soy la asistente digital de Moe. Te ayudo a preparar tu solicitud rápidamente. ¿Por dónde empezamos?", book:"Cita", bookSub:"Inicia tu solicitud en 2 minutos", prices:"Precios", pricesSub:"Todos los servicios y precios", question:"Preguntas", questionSub:"Respuestas rápidas y contacto con Moe", priceTitle:"Nuestros precios", bookNow:"Solicitar cita", faqTitle:"Preguntas frecuentes", faqSub:"Toca una pregunta para ver la respuesta.", notListed:"Mi pregunta no está aquí", qTitle:"Tu pregunta", qSub:"Escribe con libertad – tu mensaje va directo a Moe por WhatsApp.", qPlaceholder:"Ej.: ¿Hacéis peinados de novia? ¿Abrís los domingos? …", qSendMoe:"Enviar pregunta a Moe", menuBack:"Volver al menú"},
-  nl:{intro:"Hoi, ik ben Yara", introSub:"Ik ben Moe's digitale assistent. Ik help je je aanvraag snel voor te bereiden. Waarmee beginnen we?", book:"Afspraak", bookSub:"Start je aanvraag in 2 minuten", prices:"Prijzen", pricesSub:"Alle behandelingen en prijzen op een rij", question:"Vragen", questionSub:"Snelle antwoorden & contact met Moe", priceTitle:"Onze prijzen", bookNow:"Afspraak aanvragen", faqTitle:"Veelgestelde vragen", faqSub:"Tik op een vraag om het antwoord te zien.", notListed:"Mijn vraag staat er niet bij", qTitle:"Jouw vraag", qSub:"Schrijf vrijuit – je bericht gaat direct naar Moe op WhatsApp.", qPlaceholder:"bv. Doen jullie bruidskapsels? Zijn jullie zondag open? …", qSendMoe:"Vraag aan Moe sturen", menuBack:"Terug naar menu"},
-  da:{intro:"سلام، أنا يارا", introSub:"أنا المساعدة الرقمية ديال مو. كنعاونك تجهزي طلبك بسرعة. بشنو نبداو؟", book:"موعد", bookSub:"بدي طلبك ف2 دقايق", prices:"الأثمنة", pricesSub:"جميع الخدمات والأثمنة", question:"أسئلة", questionSub:"أجوبة سريعة والتواصل مع مو", priceTitle:"الأثمنة ديالنا", bookNow:"طلب موعد", faqTitle:"أسئلة كثيرة", faqSub:"كليكي على سؤال باش تشوفي الجواب.", notListed:"سؤالي ما كانش هنا", qTitle:"السؤال ديالك", qSub:"كتبي بحرية – الرسالة ديالك غادية نيشان لمو فواتساب.", qPlaceholder:"مثلا: واش كديرو تسريحات العروسة؟ واش خدامين نهار الحد؟ …", qSendMoe:"صيفطي السؤال لمو", menuBack:"رجوع للقائمة"},
+  fr:{intro:"Coucou, je suis Yara", introSub:"Je suis l'assistante digitale de Moe. Je vous aide à préparer votre demande rapidement. Par quoi commençons-nous ?", book:"Rendez-vous", bookSub:"Lancez votre demande en 2 minutes", prices:"Tarifs", pricesSub:"Toutes les prestations et les prix", question:"Questions", questionSub:"Réponses rapides & contact avec Moe", priceTitle:"Nos tarifs", bookNow:"Prendre rendez-vous", nadorNote:"Cette app concerne uniquement les rendez-vous et les informations pour Nador. Pour un rendez-vous en Allemagne, contactez Moe comme d'habitude.", igBtn:"Moe sur Instagram", faqTitle:"Questions fréquentes", faqSub:"Touchez une question pour voir la réponse.", notListed:"Ma question n'y est pas", qTitle:"Votre question", qSub:"Écrivez librement – votre message part directement à Moe sur WhatsApp.", qPlaceholder:"Ex. : Faites-vous les mariées ? Êtes-vous ouverts le dimanche ?…", qSendMoe:"Envoyer la question à Moe", menuBack:"Retour au menu"},
+  de:{intro:"Hi, ich bin Yara", introSub:"Ich bin Moes digitale Assistentin. Ich helfe dir, deine Anfrage schnell vorzubereiten. Womit starten wir?", book:"Termin", bookSub:"In 2 Minuten deine Anfrage starten", prices:"Preise", pricesSub:"Alle Leistungen und Preise im Überblick", question:"Fragen", questionSub:"Schnelle Antworten & Kontakt zu Moe", priceTitle:"Unsere Preise", bookNow:"Termin anfragen", nadorNote:"Diese App ist nur für Termine und Infos in Nador. Für einen Termin in Deutschland melde dich wie gewohnt direkt bei Moe.", igBtn:"Moe auf Instagram", faqTitle:"Häufige Fragen", faqSub:"Tippe auf eine Frage, um die Antwort zu sehen.", notListed:"Meine Frage war nicht dabei", qTitle:"Deine Frage", qSub:"Schreib frei drauflos – deine Nachricht geht direkt an Moe auf WhatsApp.", qPlaceholder:"z. B. Macht ihr Braut-Styling? Habt ihr sonntags offen? …", qSendMoe:"Frage an Moe senden", menuBack:"Zurück zum Menü"},
+  en:{intro:"Hi, I'm Yara", introSub:"I'm Moe's digital assistant. I'll help you prepare your request quickly. Where shall we start?", book:"Booking", bookSub:"Start your request in 2 minutes", prices:"Prices", pricesSub:"All services and prices at a glance", question:"Questions", questionSub:"Quick answers & contact with Moe", priceTitle:"Our prices", bookNow:"Request appointment", nadorNote:"This app is only for appointments and info in Nador. For an appointment in Germany, contact Moe directly as usual.", igBtn:"Moe on Instagram", faqTitle:"Frequent questions", faqSub:"Tap a question to see the answer.", notListed:"My question isn't here", qTitle:"Your question", qSub:"Write freely – your message goes straight to Moe on WhatsApp.", qPlaceholder:"e.g. Do you do bridal styling? Are you open on Sundays? …", qSendMoe:"Send question to Moe", menuBack:"Back to menu"},
+  es:{intro:"¡Hola! Soy Yara", introSub:"Soy la asistente digital de Moe. Te ayudo a preparar tu solicitud rápidamente. ¿Por dónde empezamos?", book:"Cita", bookSub:"Inicia tu solicitud en 2 minutos", prices:"Precios", pricesSub:"Todos los servicios y precios", question:"Preguntas", questionSub:"Respuestas rápidas y contacto con Moe", priceTitle:"Nuestros precios", bookNow:"Solicitar cita", nadorNote:"Esta app es solo para citas e información en Nador. Para una cita en Alemania, contacta con Moe directamente como siempre.", igBtn:"Moe en Instagram", faqTitle:"Preguntas frecuentes", faqSub:"Toca una pregunta para ver la respuesta.", notListed:"Mi pregunta no está aquí", qTitle:"Tu pregunta", qSub:"Escribe con libertad – tu mensaje va directo a Moe por WhatsApp.", qPlaceholder:"Ej.: ¿Hacéis peinados de novia? ¿Abrís los domingos? …", qSendMoe:"Enviar pregunta a Moe", menuBack:"Volver al menú"},
+  nl:{intro:"Hoi, ik ben Yara", introSub:"Ik ben Moe's digitale assistent. Ik help je je aanvraag snel voor te bereiden. Waarmee beginnen we?", book:"Afspraak", bookSub:"Start je aanvraag in 2 minuten", prices:"Prijzen", pricesSub:"Alle behandelingen en prijzen op een rij", question:"Vragen", questionSub:"Snelle antwoorden & contact met Moe", priceTitle:"Onze prijzen", bookNow:"Afspraak aanvragen", nadorNote:"Deze app is alleen voor afspraken en info in Nador. Voor een afspraak in Duitsland neem je zoals gewoonlijk direct contact op met Moe.", igBtn:"Moe op Instagram", faqTitle:"Veelgestelde vragen", faqSub:"Tik op een vraag om het antwoord te zien.", notListed:"Mijn vraag staat er niet bij", qTitle:"Jouw vraag", qSub:"Schrijf vrijuit – je bericht gaat direct naar Moe op WhatsApp.", qPlaceholder:"bv. Doen jullie bruidskapsels? Zijn jullie zondag open? …", qSendMoe:"Vraag aan Moe sturen", menuBack:"Terug naar menu"},
+  da:{intro:"سلام، أنا يارا", introSub:"أنا المساعدة الرقمية ديال مو. كنعاونك تجهزي طلبك بسرعة. بشنو نبداو؟", book:"موعد", bookSub:"بدي طلبك ف2 دقايق", prices:"الأثمنة", pricesSub:"جميع الخدمات والأثمنة", question:"أسئلة", questionSub:"أجوبة سريعة والتواصل مع مو", priceTitle:"الأثمنة ديالنا", bookNow:"طلب موعد", nadorNote:"هاد التطبيق غير للمواعيد والمعلومات فالناظور. إلا بغيتي موعد فألمانيا، تواصلي مع مو مباشرة بحال العادة.", igBtn:"مو على إنستغرام", faqTitle:"أسئلة كثيرة", faqSub:"كليكي على سؤال باش تشوفي الجواب.", notListed:"سؤالي ما كانش هنا", qTitle:"السؤال ديالك", qSub:"كتبي بحرية – الرسالة ديالك غادية نيشان لمو فواتساب.", qPlaceholder:"مثلا: واش كديرو تسريحات العروسة؟ واش خدامين نهار الحد؟ …", qSendMoe:"صيفطي السؤال لمو", menuBack:"رجوع للقائمة"},
 };
 
 /* Reihenfolge der Sprach-Kacheln */
@@ -667,16 +752,34 @@ const LANG_ORDER = ["da","fr","de","en","es","nl"];
 
 /* ── Foto-Upload-Texte ── */
 const P = {
-  fr:{add:"Ajouter une photo", addSub:"De vos cheveux, de face ou de dos – ça nous aide beaucoup.", optional:"facultatif", change:"Changer", uploading:"Envoi de la photo…", fail:"L'envoi de la photo a échoué – vous pourrez l'ajouter directement dans WhatsApp.", sumPhotoLinked:"Photo jointe ✓"},
-  de:{add:"Foto hinzufügen", addSub:"Von deinem Haar, vorn oder hinten – hilft uns sehr.", optional:"optional", change:"Ändern", uploading:"Foto wird hochgeladen…", fail:"Foto-Upload hat nicht geklappt – du kannst es direkt in WhatsApp anhängen.", sumPhotoLinked:"Foto angehängt ✓"},
-  en:{add:"Add a photo", addSub:"Of your hair, front or back – it helps us a lot.", optional:"optional", change:"Change", uploading:"Uploading photo…", fail:"Photo upload failed – you can attach it directly in WhatsApp.", sumPhotoLinked:"Photo attached ✓"},
-  es:{add:"Añadir una foto", addSub:"De tu cabello, de frente o de espaldas – nos ayuda mucho.", optional:"opcional", change:"Cambiar", uploading:"Subiendo la foto…", fail:"No se pudo subir la foto – puedes adjuntarla directamente en WhatsApp.", sumPhotoLinked:"Foto adjunta ✓"},
-  nl:{add:"Foto toevoegen", addSub:"Van je haar, voor- of achterkant – helpt ons enorm.", optional:"optioneel", change:"Wijzigen", uploading:"Foto uploaden…", fail:"Uploaden mislukt – je kunt de foto direct in WhatsApp meesturen.", sumPhotoLinked:"Foto toegevoegd ✓"},
-  da:{add:"زيدي تصويرة", addSub:"ديال شعرك، من قدام ولا من اللور – كتعاونا بزاف.", optional:"اختياري", change:"بدّلي", uploading:"كنصيفطو التصويرة…", fail:"ما مشاتش التصويرة – تقدري تصيفطيها مباشرة فواتساب.", sumPhotoLinked:"التصويرة تزادت ✓"},
+  fr:{change:"Changer", uploading:"Envoi de la photo…", fail:"L'envoi de la photo a échoué – vous pourrez l'ajouter directement dans WhatsApp.", optional:"facultatif",
+      curTitle:"Photo de vos cheveux actuels", curSub:"De face ou de dos – ça nous aide beaucoup.",
+      wishTitle:"Résultat souhaité", wishSub:"Une inspiration, une photo qui vous plaît.",
+      sumCur:"Cheveux actuels ✓", sumWish:"Inspiration ✓"},
+  de:{change:"Ändern", uploading:"Foto wird hochgeladen…", fail:"Foto-Upload hat nicht geklappt – du kannst es direkt in WhatsApp anhängen.", optional:"optional",
+      curTitle:"Foto von deinem Haar jetzt", curSub:"Vorn oder hinten – hilft uns sehr.",
+      wishTitle:"Wunschergebnis", wishSub:"Eine Inspiration, ein Look der dir gefällt.",
+      sumCur:"Aktuelles Haar ✓", sumWish:"Inspiration ✓"},
+  en:{change:"Change", uploading:"Uploading photo…", fail:"Photo upload failed – you can attach it directly in WhatsApp.", optional:"optional",
+      curTitle:"Photo of your hair now", curSub:"Front or back – it helps us a lot.",
+      wishTitle:"Desired result", wishSub:"An inspiration, a look you like.",
+      sumCur:"Current hair ✓", sumWish:"Inspiration ✓"},
+  es:{change:"Cambiar", uploading:"Subiendo la foto…", fail:"No se pudo subir la foto – puedes adjuntarla directamente en WhatsApp.", optional:"opcional",
+      curTitle:"Foto de tu cabello ahora", curSub:"De frente o de espaldas – nos ayuda mucho.",
+      wishTitle:"Resultado deseado", wishSub:"Una inspiración, un look que te guste.",
+      sumCur:"Cabello actual ✓", sumWish:"Inspiración ✓"},
+  nl:{change:"Wijzigen", uploading:"Foto uploaden…", fail:"Uploaden mislukt – je kunt de foto direct in WhatsApp meesturen.", optional:"optioneel",
+      curTitle:"Foto van je haar nu", curSub:"Voor- of achterkant – helpt ons enorm.",
+      wishTitle:"Gewenst resultaat", wishSub:"Een inspiratie, een look die je mooi vindt.",
+      sumCur:"Huidige haar ✓", sumWish:"Inspiratie ✓"},
+  da:{change:"بدّلي", uploading:"كنصيفطو التصويرة…", fail:"ما مشاتش التصويرة – تقدري تصيفطيها مباشرة فواتساب.", optional:"اختياري",
+      curTitle:"تصويرة ديال شعرك دابا", curSub:"من قدام ولا من اللور – كتعاونا بزاف.",
+      wishTitle:"النتيجة اللي بغيتي", wishSub:"شي إلهام، شي لوك عجبك.",
+      sumCur:"الشعر ديالك دابا ✓", sumWish:"إلهام ✓"},
 };
 
 /* ── State ── */
-let state = {lang:null, service:null, hair:"", period:"", photoData:null, photoUrl:null, name:""};
+let state = {lang:null, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:""};
 let step = 0; // 0 Sprache · 1 Service · 2 Haar · 3 Zeitraum · 4 Zusammenfassung
 
 const app = document.getElementById("app");
@@ -754,6 +857,11 @@ function renderMenu(){
         <span><span class="mb-title">${ML.question}</span><span class="mb-sub" style="display:block">${ML.questionSub}</span></span>
       </button>
     </div>
+    <p class="nador-note">📍 ${ML.nadorNote}</p>
+    ${MOE_INSTAGRAM?`<a class="btn btn-ig" href="${MOE_INSTAGRAM}" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+      ${ML.igBtn}
+    </a>`:""}
     <div class="actions">
       <button class="btn btn-ghost" id="back">${t().back}</button>
     </div>`;
@@ -917,95 +1025,164 @@ function renderHair(){
     <p class="step-sub">${L.qSub}</p>
     <div class="step-body">
       <textarea id="hair" placeholder="${L.qPlaceholder}">${state.hair}</textarea>
-      <div id="photoArea"></div>
+      <div id="curArea"></div>
+      <div id="wishArea"></div>
     </div>
     <div class="actions">
       <button class="btn btn-primary" id="next" ${state.hair.trim()?"":"disabled"}>${L.next}</button>
       <button class="btn btn-ghost" id="back">${L.back}</button>
     </div>
-    <input type="file" id="photoInput" accept="image/*" style="display:none">`;
+    <input type="file" id="curInput" accept="image/*" style="display:none">
+    <input type="file" id="wishInput" accept="image/*" style="display:none">`;
   const ta = el.querySelector("#hair");
   ta.oninput = ()=>{ state.hair = ta.value; el.querySelector("#next").disabled = !ta.value.trim(); };
   el.querySelector("#next").onclick = ()=>{ step=4; render(); };
   el.querySelector("#back").onclick = ()=>{ step=2; render(); };
 
-  /* Foto-Bereich: bei Foto-Services prominent, bei allen anderen optional */
   const PL = P[state.lang] || P.en;
-  const area = el.querySelector("#photoArea");
-  const input = el.querySelector("#photoInput");
-  function drawPhotoArea(){
-    if(state.photoData){
-      area.innerHTML = `
-        <div class="photo-preview">
-          <img src="${state.photoData}" alt="">
-          <button class="pp-remove" aria-label="✕">✕</button>
-          <button class="pp-change">${PL.change}</button>
-        </div>`;
-      area.querySelector(".pp-remove").onclick = ()=>{ state.photoData=null; state.photoUrl=null; drawPhotoArea(); };
-      area.querySelector(".pp-change").onclick = ()=>input.click();
-    } else {
-      area.innerHTML = `
-        <button class="photo-box" type="button">
-          <span class="pb-ico">📷</span>
-          <span class="pb-txt">
-            <span class="pb-title">${PL.add}${s.photo?"":" · "+PL.optional}</span>
-            <span class="pb-sub">${s.photo?L.photoHint:PL.addSub}</span>
-          </span>
-        </button>`;
-      area.querySelector(".photo-box").onclick = ()=>input.click();
+
+  /* Wiederverwendbarer Foto-Slot: 'cur' = aktuelles Haar, 'wish' = Wunschergebnis */
+  function makeSlot(kind){
+    const isCur = kind==="cur";
+    const area  = el.querySelector(isCur ? "#curArea" : "#wishArea");
+    const input = el.querySelector(isCur ? "#curInput" : "#wishInput");
+    const dataKey = isCur ? "photoData" : "wishData";
+    const urlKey  = isCur ? "photoUrl"  : "wishUrl";
+    const title = isCur ? PL.curTitle : PL.wishTitle;
+    const sub   = isCur ? PL.curSub   : PL.wishSub;
+    const optFlag = (isCur && s.photo) ? "" : " · "+PL.optional; // Ist-Foto bei Foto-Services nicht als optional labeln
+    function draw(){
+      if(state[dataKey]){
+        area.innerHTML = `
+          <div class="photo-preview">
+            <img src="${state[dataKey]}" alt="">
+            <button class="pp-remove" aria-label="✕">✕</button>
+            <button class="pp-change">${PL.change}</button>
+          </div>`;
+        area.querySelector(".pp-remove").onclick = ()=>{ state[dataKey]=null; state[urlKey]=null; draw(); };
+        area.querySelector(".pp-change").onclick = ()=>input.click();
+      } else {
+        area.innerHTML = `
+          <button class="photo-box" type="button">
+            <span class="pb-ico">${isCur?"📷":"✨"}</span>
+            <span class="pb-txt">
+              <span class="pb-title">${title}${optFlag}</span>
+              <span class="pb-sub">${sub}</span>
+            </span>
+          </button>`;
+        area.querySelector(".photo-box").onclick = ()=>input.click();
+      }
     }
+    input.onchange = ()=>{
+      const f = input.files[0];
+      if(!f) return;
+      shrinkImage(f).then(dataUrl=>{ state[dataKey]=dataUrl; state[urlKey]=null; draw(); });
+    };
+    draw();
   }
-  input.onchange = ()=>{
-    const f = input.files[0];
-    if(!f) return;
-    shrinkImage(f).then(dataUrl=>{
-      state.photoData = dataUrl;
-      state.photoUrl = null; /* neu hochladen beim Senden */
-      drawPhotoArea();
-    });
-  };
-  drawPhotoArea();
+  makeSlot("cur");
+  makeSlot("wish");
   app.appendChild(el);
   ta.focus();
 }
 
 /* ── Schritt 3: Zeitraum ── */
+/* ── Verfügbarkeits-Helfer ── */
+function parseISO(d){ const [y,m,day]=d.split("-").map(Number); return new Date(y, m-1, day); }
+function todayMidnight(){ const t=new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); }
+function fmtDate(iso){
+  const loc = {de:"de-DE",fr:"fr-FR",en:"en-GB",es:"es-ES",nl:"nl-NL",da:"ar-MA"}[state.lang]||"en-GB";
+  try{ return parseISO(iso).toLocaleDateString(loc,{day:"numeric",month:"long"}); }
+  catch(e){ return iso; }
+}
+/* Aktives Fenster (heute drin) oder das nächste kommende; sonst null */
+function currentWindow(){
+  const today = todayMidnight();
+  const sorted = [...AVAIL].filter(w=>w&&w.von&&w.bis).sort((a,b)=>a.von<b.von?-1:1);
+  for(const w of sorted){ if(today>=parseISO(w.von) && today<=parseISO(w.bis)) return {...w, active:true}; }
+  for(const w of sorted){ if(today<parseISO(w.von)) return {...w, active:false}; }
+  return null;
+}
+
 function renderPeriod(){
   const L = t();
+  const win = currentWindow();
   const el = document.createElement("section");
   el.className = "step active";
+
+  // Info-Zeile je nach Situation
+  let info = "";
+  if(win && win.active) info = `<p class="avail-info here">${L.perHere(fmtDate(win.von), fmtDate(win.bis))}</p>`;
+  else if(win)          info = `<p class="avail-info soon">${L.perSoon(fmtDate(win.von), fmtDate(win.bis))}</p>`;
+  else                  info = `<p class="avail-info away">${L.perAway}</p>`;
+
+  // Datumsgrenzen (auf Moes Fenster begrenzt; ohne Fenster kein Limit)
+  const min = win ? win.von : "";
+  const max = win ? win.bis : "";
+  const liveSel = state.period===L.perLive;
+
   el.innerHTML = `
     <h2 class="step-title">${L.perTitle}</h2>
     <p class="step-sub">${L.perSub}</p>
-    <div class="step-body">
-      <div class="chips">
-        ${L.chips.map(c=>`<button class="chip ${state.period===c?"selected":""}">${c}</button>`).join("")}
+    ${info}
+    <div class="step-body" id="dateBody" style="${liveSel?'opacity:.4;pointer-events:none':''}">
+      <div class="date-row">
+        <label class="date-field"><span>${L.perFrom}</span>
+          <input type="date" id="dFrom" ${min?`min="${min}"`:""} ${max?`max="${max}"`:""} value="${state.dFrom||""}">
+        </label>
+        <label class="date-field"><span>${L.perTo}</span>
+          <input type="date" id="dTo" ${min?`min="${min}"`:""} ${max?`max="${max}"`:""} value="${state.dTo||""}">
+        </label>
       </div>
-      <input type="text" id="period" placeholder="${L.perPlaceholder}" value="${state.period && !L.chips.includes(state.period) ? state.period.replace(/"/g,"&quot;") : ""}">
     </div>
+    <button class="chip live-chip ${liveSel?'selected':''}" id="liveChip" style="margin-top:12px">${L.perLive}</button>
     <div class="actions">
-      <button class="btn btn-primary" id="next" ${state.period.trim()?"":"disabled"}>${L.next}</button>
+      <button class="btn btn-primary" id="next" disabled>${L.next}</button>
       <button class="btn btn-ghost" id="back">${L.back}</button>
     </div>`;
-  const inp = el.querySelector("#period");
+
+  const dFrom = el.querySelector("#dFrom");
+  const dTo   = el.querySelector("#dTo");
   const nextBtn = el.querySelector("#next");
-  el.querySelectorAll(".chip").forEach(c=>{
-    c.onclick = ()=>{
-      el.querySelectorAll(".chip").forEach(x=>x.classList.remove("selected"));
-      c.classList.add("selected");
-      state.period = c.textContent;
-      inp.value = "";
-      nextBtn.disabled = false;
-    };
-  });
-  inp.oninput = ()=>{
-    el.querySelectorAll(".chip").forEach(x=>x.classList.remove("selected"));
-    state.period = inp.value;
-    nextBtn.disabled = !inp.value.trim();
+  const liveChip = el.querySelector("#liveChip");
+  const dateBody = el.querySelector("#dateBody");
+
+  function syncNext(){
+    if(state.period===L.perLive){ nextBtn.disabled=false; return; }
+    nextBtn.disabled = !(state.dFrom && state.dTo);
+  }
+  function composePeriod(){
+    if(state.dFrom && state.dTo){
+      state.period = `${fmtDate(state.dFrom)} – ${fmtDate(state.dTo)}`;
+    } else state.period = "";
+  }
+  dFrom.onchange = ()=>{
+    state.dFrom = dFrom.value;
+    if(state.dTo && state.dTo < dFrom.value){ state.dTo = dFrom.value; dTo.value = dFrom.value; }
+    dTo.min = dFrom.value || min;
+    composePeriod(); syncNext();
   };
+  dTo.onchange = ()=>{
+    state.dTo = dTo.value;
+    composePeriod(); syncNext();
+  };
+  liveChip.onclick = ()=>{
+    if(state.period===L.perLive){
+      state.period=""; liveChip.classList.remove("selected");
+      dateBody.style.opacity=""; dateBody.style.pointerEvents="";
+    } else {
+      state.period=L.perLive; state.dFrom=""; state.dTo="";
+      dFrom.value=""; dTo.value="";
+      liveChip.classList.add("selected");
+      dateBody.style.opacity=".4"; dateBody.style.pointerEvents="none";
+    }
+    syncNext();
+  };
+
   nextBtn.onclick = ()=>{ step=5; render(); };
   el.querySelector("#back").onclick = ()=>{ step=3; render(); };
   app.appendChild(el);
+  syncNext();
 }
 
 /* ── Schritt 4: Zusammenfassung + WhatsApp-Handoff ── */
@@ -1023,9 +1200,14 @@ function renderSummary(){
       ${state.photoData?`
       <div class="sc-row with-thumb">
         <img class="sc-thumb" src="${state.photoData}" alt="">
-        <div class="sc-value" style="font-size:.85rem;color:var(--plum-soft)">${PL.sumPhotoLinked}</div>
+        <div class="sc-value" style="font-size:.85rem;color:var(--plum-soft)">${PL.sumCur}</div>
       </div>`
       : (s.photo?`<div class="sc-row"><div class="sc-value" style="font-size:.85rem;color:var(--plum-soft)">${L.sumPhoto}</div></div>`:"")}
+      ${state.wishData?`
+      <div class="sc-row with-thumb">
+        <img class="sc-thumb" src="${state.wishData}" alt="">
+        <div class="sc-value" style="font-size:.85rem;color:var(--plum-soft)">${PL.sumWish}</div>
+      </div>`:""}
     </div>
     <div class="step-body" style="margin-top:14px">
       <label style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--champagne)" for="cname">${(WA[state.lang]||WA.en).nameLabel}</label>
@@ -1047,12 +1229,14 @@ function renderSummary(){
   sendBtn.onclick = async (e)=>{
     e.preventDefault();
     if(busy) return;
-    /* Foto vorhanden, aber noch nicht hochgeladen? → erst zu imgbb */
-    if(state.photoData && !state.photoUrl && IMGBB_KEY){
+    /* Fotos vorhanden, aber noch nicht hochgeladen? → erst zu imgbb */
+    const needUpload = (state.photoData && !state.photoUrl) || (state.wishData && !state.wishUrl);
+    if(needUpload && IMGBB_KEY){
       busy = true;
       el.querySelector("#sendLabel").innerHTML = `<span class="spin"></span>${PL.uploading}`;
       try{
-        state.photoUrl = await uploadToImgbb(state.photoData);
+        if(state.photoData && !state.photoUrl) state.photoUrl = await uploadToImgbb(state.photoData);
+        if(state.wishData && !state.wishUrl)   state.wishUrl  = await uploadToImgbb(state.wishData);
       }catch(err){
         el.querySelector("#errBox").innerHTML = `<p class="upload-err">${PL.fail}</p>`;
       }
@@ -1063,7 +1247,7 @@ function renderSummary(){
     window.open(buildWaLink(), "_blank");
   };
   el.querySelector("#restart").onclick = ()=>{
-    state = {lang:state.lang, service:null, hair:"", period:"", photoData:null, photoUrl:null, name:state.name};
+    state = {lang:state.lang, service:null, hair:"", period:"", dFrom:"", dTo:"", photoData:null, photoUrl:null, wishData:null, wishUrl:null, name:state.name};
     step = 1; render();
   };
   app.appendChild(el);
@@ -1072,12 +1256,12 @@ function renderSummary(){
 /* Nachricht an Moe: deutsche Labels (er liest deutsch), Kundendaten im Original */
 /* ── WhatsApp-Nachrichten aus Sicht der Kundin (warm, high-class, ihre Sprache) ── */
 const WA = {
-  de:{greet:"Hallo Moe, ich würde gerne einen Termin anfragen ✨", lService:"Leistung", lPeriod:"Zeitraum", lHair:"Mein Haar", lPhoto:"Foto", photoNote:"Ich schicke dir gleich ein Foto 📷", qGreet:"Hallo Moe, ich hätte eine Frage ✨", nameLabel:"Dein Name (optional)", namePh:"z. B. Anna"},
-  fr:{greet:"Bonjour Moe, j'aimerais prendre rendez-vous ✨", lService:"Prestation", lPeriod:"Période", lHair:"Mes cheveux", lPhoto:"Photo", photoNote:"Je t'envoie une photo juste après 📷", qGreet:"Bonjour Moe, j'aurais une question ✨", nameLabel:"Votre prénom (facultatif)", namePh:"ex. : Anna"},
-  en:{greet:"Hi Moe, I'd love to request an appointment ✨", lService:"Service", lPeriod:"When", lHair:"My hair", lPhoto:"Photo", photoNote:"I'll send a photo right after 📷", qGreet:"Hi Moe, I have a little question ✨", nameLabel:"Your name (optional)", namePh:"e.g. Anna"},
-  es:{greet:"Hola Moe, me gustaría pedir una cita ✨", lService:"Servicio", lPeriod:"Fechas", lHair:"Mi cabello", lPhoto:"Foto", photoNote:"Te envío una foto enseguida 📷", qGreet:"Hola Moe, tengo una pregunta ✨", nameLabel:"Tu nombre (opcional)", namePh:"Ej.: Anna"},
-  nl:{greet:"Hoi Moe, ik wil graag een afspraak aanvragen ✨", lService:"Behandeling", lPeriod:"Periode", lHair:"Mijn haar", lPhoto:"Foto", photoNote:"Ik stuur zo een foto 📷", qGreet:"Hoi Moe, ik heb een vraagje ✨", nameLabel:"Je naam (optioneel)", namePh:"bv. Anna"},
-  da:{greet:"سلام مو، بغيت ناخد موعد ✨", lService:"الخدمة", lPeriod:"الفترة", lHair:"شعري", lPhoto:"صورة", photoNote:"غادي نصيفط ليك تصويرة دابا 📷", qGreet:"سلام مو، عندي سؤال صغير ✨", nameLabel:"سميتك (اختياري)", namePh:"مثلا: أمينة"},
+  de:{greet:"Hallo Moe, ich würde gerne einen Termin anfragen ✨", lService:"Leistung", lPeriod:"Zeitraum", lHair:"Mein Haar", lPhoto:"Foto aktuell", lWish:"Wunschergebnis", photoNote:"Ich schicke dir gleich ein Foto 📷", qGreet:"Hallo Moe, ich hätte eine Frage ✨", nameLabel:"Dein Name (optional)", namePh:"z. B. Anna"},
+  fr:{greet:"Bonjour Moe, j'aimerais prendre rendez-vous ✨", lService:"Prestation", lPeriod:"Période", lHair:"Mes cheveux", lPhoto:"Photo actuelle", lWish:"Résultat souhaité", photoNote:"Je t'envoie une photo juste après 📷", qGreet:"Bonjour Moe, j'aurais une question ✨", nameLabel:"Votre prénom (facultatif)", namePh:"ex. : Anna"},
+  en:{greet:"Hi Moe, I'd love to request an appointment ✨", lService:"Service", lPeriod:"When", lHair:"My hair", lPhoto:"Current photo", lWish:"Desired result", photoNote:"I'll send a photo right after 📷", qGreet:"Hi Moe, I have a little question ✨", nameLabel:"Your name (optional)", namePh:"e.g. Anna"},
+  es:{greet:"Hola Moe, me gustaría pedir una cita ✨", lService:"Servicio", lPeriod:"Fechas", lHair:"Mi cabello", lPhoto:"Foto actual", lWish:"Resultado deseado", photoNote:"Te envío una foto enseguida 📷", qGreet:"Hola Moe, tengo una pregunta ✨", nameLabel:"Tu nombre (opcional)", namePh:"Ej.: Anna"},
+  nl:{greet:"Hoi Moe, ik wil graag een afspraak aanvragen ✨", lService:"Behandeling", lPeriod:"Periode", lHair:"Mijn haar", lPhoto:"Foto nu", lWish:"Gewenst resultaat", photoNote:"Ik stuur zo een foto 📷", qGreet:"Hoi Moe, ik heb een vraagje ✨", nameLabel:"Je naam (optioneel)", namePh:"bv. Anna"},
+  da:{greet:"سلام مو، بغيت ناخد موعد ✨", lService:"الخدمة", lPeriod:"الفترة", lHair:"شعري", lPhoto:"صورة دابا", lWish:"النتيجة المطلوبة", photoNote:"غادي نصيفط ليك تصويرة دابا 📷", qGreet:"سلام مو، عندي سؤال صغير ✨", nameLabel:"سميتك (اختياري)", namePh:"مثلا: أمينة"},
 };
 
 function buildWaText(){
@@ -1092,6 +1276,7 @@ function buildWaText(){
   ];
   if(state.photoUrl) lines.push(`📷 ${w.lPhoto}: ${state.photoUrl}`);
   else if(state.photoData || s.photo) lines.push(w.photoNote);
+  if(state.wishUrl) lines.push(`✨ ${w.lWish}: ${state.wishUrl}`);
   if(state.name && state.name.trim()) lines.push(``, `– ${state.name.trim()}`);
   return lines.join("\n");
 }
@@ -1151,6 +1336,7 @@ function logToSheet(){
         hair_info: state.hair,
         preferred_date: state.period,
         photo_url: state.photoUrl || "",
+        wish_photo_url: state.wishUrl || "",
         customer_name: (state.name||"").trim(),
         customer_phone: "",
         whatsapp_message: buildWaText(),
@@ -1176,7 +1362,13 @@ function esc(str){
   }
 })();
 
-render();
+/* Verfügbarkeit laden – erst danach rendern. Schlägt es fehl, läuft die App
+   ohne Datumslimit weiter (Fallback: Kundin kann jeden Zeitraum wählen). */
+fetch("verfuegbarkeit.json", {cache:"no-store"})
+  .then(r=>r.ok ? r.json() : null)
+  .then(j=>{ if(j && Array.isArray(j.zeitraeume)) AVAIL = j.zeitraeume; })
+  .catch(()=>{})
+  .finally(()=>{ render(); });
 </script>
 </body>
 </html>
