@@ -173,12 +173,14 @@ main{
   border-radius:var(--radius);
   padding:14px 16px;
   cursor:pointer;
+  color:var(--plum-ink);
   display:flex;align-items:center;gap:12px;
   text-align:inherit;font-family:var(--font-body);
   box-shadow:0 4px 14px rgba(51,32,46,.06);
   transition:border-color .15s, transform .12s;
   width:100%;
 }
+.svc-name{font-weight:700;font-size:.95rem;color:var(--plum-ink)}
 .svc:active{transform:scale(.985)}
 .svc.selected{border-color:var(--copper);background:#fdf7f2}
 .svc-emoji{font-size:1.3rem;flex:0 0 auto}
@@ -276,7 +278,7 @@ textarea:focus, input:focus{outline:2px solid var(--copper);outline-offset:1px;b
 .wa-note{font-size:.78rem;color:var(--plum-soft);text-align:center;line-height:1.5}
 
 /* ── Foto-Upload ──────────────────────── */
-.photo-box{
+.photo-box{color:var(--plum-ink);
   border:1.5px dashed var(--champagne);
   border-radius:var(--radius);
   background:var(--white);
@@ -371,7 +373,7 @@ textarea:focus, input:focus{outline:2px solid var(--copper);outline-offset:1px;b
 }
 .btn-ig svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.6}
 @media (hover:hover){ .btn-ig:hover{border-color:var(--copper);color:var(--copper)} }
-.menu-btn{
+.menu-btn{color:var(--plum-ink);
   background:var(--white);
   border:1px solid var(--blush-deep);
   border-radius:var(--radius);
@@ -398,7 +400,7 @@ textarea:focus, input:focus{outline:2px solid var(--copper);outline-offset:1px;b
 .price-table{display:flex;flex-direction:column;gap:0;background:var(--white);border:1px solid var(--blush-deep);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
 .pt-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:13px 16px;border-top:1px solid var(--blush)}
 .pt-row:first-child{border-top:none}
-.pt-name{font-size:.9rem;font-weight:500}
+.pt-name{color:var(--plum-ink);font-size:.9rem;font-weight:500}
 .pt-name small{display:block;font-size:.72rem;color:var(--plum-soft);font-weight:400;margin-top:1px}
 .pt-price{font-size:.85rem;font-weight:700;color:var(--copper);white-space:nowrap}
 
@@ -446,18 +448,20 @@ textarea:focus, input:focus{outline:2px solid var(--copper);outline-offset:1px;b
 .avail-info.soon{background:var(--blush-deep);color:var(--plum-soft)}
 .avail-info.away{background:#fbeaea;color:#a33}
 .date-row{display:flex;gap:10px}
-.date-field{flex:1;display:flex;flex-direction:column;gap:5px}
+.date-field{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:5px}
 .date-field span{
   font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne);
   padding-inline-start:2px;
 }
 .date-field input[type=date]{
-  width:100%;background:var(--white);
+  width:100%;min-width:0;box-sizing:border-box;
+  background:var(--white);
   border:1px solid var(--blush-deep);border-radius:var(--radius);
-  padding:14px 14px;font-family:var(--font-body);font-size:1rem;
+  padding:14px 10px;font-family:var(--font-body);font-size:.95rem;
   color:var(--plum-ink);
 }
 .date-field input[type=date]:focus{outline:2px solid var(--copper);outline-offset:1px;border-color:transparent}
+@media (max-width:360px){ .date-row{flex-direction:column} }
 .live-chip{width:100%;padding:13px}
 
 footer{
